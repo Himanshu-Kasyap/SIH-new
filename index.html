@@ -70,9 +70,8 @@
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
-    <!-- Skip links for screen readers -->
+    <!-- Skip link for screen readers -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <a href="#main-nav" class="skip-link">Skip to navigation</a>
     
     <!-- Live region for announcements -->
     <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
@@ -87,34 +86,13 @@
                 </a>
             </div>
             
-            <!-- Mobile Navigation Toggle -->
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span class="sr-only">Menu</span>
-            </button>
-            
             <!-- Navigation items -->
             <ul class="navbar-nav" id="main-nav" role="menubar">
                 <li><a href="pages/auth/login.html">HR Login</a></li>
                 <li><a href="pages/auth/employee-login.html">Employee Login</a></li>
+                <li><a href="pages/auth/hr-register.html">HR Register</a></li>
+                <li><a href="pages/auth/register.html">Employee Register</a></li>
             </ul>
-            
-            <!-- User dropdown (hidden until authenticated) -->
-            <div class="navbar-user" id="user-nav" style="display: none;">
-                <div class="user-dropdown" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
-                    <span id="user-name">User</span>
-                    <span class="dropdown-arrow" aria-hidden="true">▼</span>
-                </div>
-            </div>
-            
-            <!-- Mobile Navigation Menu -->
-            <div class="mobile-nav-menu" id="mobile-nav-menu">
-                <ul class="navbar-nav" id="mobile-nav-items" role="menubar">
-                    <!-- Mobile navigation items will be dynamically inserted -->
-                </ul>
-            </div>
         </div>
     </nav>
 

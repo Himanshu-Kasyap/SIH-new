@@ -354,12 +354,16 @@ a:hover {
   z-index: 1000;
   font-weight: var(--font-weight-semibold);
   transition: top 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .skip-link:focus {
   top: 6px;
   outline: 2px solid var(--color-white);
   outline-offset: 2px;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Enhanced Focus styles */
