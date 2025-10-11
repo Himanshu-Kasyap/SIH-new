@@ -29,6 +29,8 @@
   display: flex;
   list-style: none;
   gap: var(--space-md);
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-nav a {
@@ -526,11 +528,40 @@
 /* Mobile Responsive */
 @media (max-width: 767px) {
   .navbar-nav {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-xs);
+  }
+  
+  .navbar-nav a {
+    font-size: var(--font-size-xs);
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+  
+  .navbar-container {
+    padding: var(--space-xs) var(--space-sm);
+    flex-wrap: wrap;
   }
   
   .mobile-nav-toggle {
-    display: flex;
+    display: none;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .navbar-nav {
+    gap: 4px;
+  }
+  
+  .navbar-nav a {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+  .navbar-brand {
+    font-size: var(--font-size-base);
   }
   
   .navbar-container {
