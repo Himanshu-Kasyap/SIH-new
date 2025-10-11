@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HR Administrator Registration - HR Talent Management System">
+    <title>HR Registration - HR Talent Management System</title>
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Skip links for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#register-form" class="skip-link">Skip to registration form</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Navigation Header -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="../../index.html" aria-label="HR Talent Management System Home">
+                    HR Talent Management
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a href="login.html">Back to Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" role="main" id="main-content">
+        <div class="flex justify-center" style="min-height: 80vh; align-items: center; padding: var(--space-lg) 0;">
+            <div class="card" style="width: 100%; max-width: 600px;">
+                <!-- Registration Form Header -->
+                <header class="card-header" style="text-align: center; margin-bottom: var(--space-lg);">
+                    <div class="metric-icon primary" style="margin: 0 auto var(--space-sm);" aria-hidden="true">
+                        👥
+                    </div>
+                    <h1 class="card-title">HR Administrator Registration</h1>
+                    <p class="card-subtitle">Create a new HR administrator account with full system access</p>
+                </header>
+
+                <!-- Info Alert -->
+                <div class="alert alert-info" style="margin-bottom: var(--space-md);">
+                    <div class="alert-icon">ℹ</div>
+                    <div class="alert-message">
+                        <strong>Administrator Access:</strong> This registration creates an HR administrator account with full access to talent management tools, analytics, and employee data.
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="hr-register-form" data-form="hr-register" novalidate aria-labelledby="register-title">
+                    <fieldset class="fieldset">
+                        <legend>Personal Information</legend>
+                        
+                        <div class="grid grid-cols-2" style="gap: var(--space-md);">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label required">First Name</label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="firstName" 
+                                    class="form-input" 
+                                    required 
+                                    autocomplete="given-name"
+                                    placeholder="Enter first name"
+                                    aria-describedby="firstName-help"
+                                >
+                                <div id="firstName-help" class="form-help">Your legal first name</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName" class="form-label required">Last Name</label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="lastName" 
+                                    class="form-input" 
+                                    required 
+                                    autocomplete="family-name"
+                                    placeholder="Enter last name"
+                                    aria-describedby="lastName-help"
+                                >
+                                <div id="lastName-help" class="form-help">Your legal last name</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label required">Work Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                required 
+                                autocomplete="email"
+                                placeholder="Enter your work email address"
+                                aria-describedby="email-help"
+                            >
+                            <div id="email-help" class="form-help">Use your official company email address</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="employeeId" class="form-label required">Employee ID</label>
+                            <input 
+                                type="text" 
+                                id="employeeId" 
+                                name="employeeId" 
+                                class="form-input" 
+                                required 
+                                placeholder="Enter your employee ID"
+                                aria-describedby="employeeId-help"
+                            >
+                            <div id="employeeId-help" class="form-help">Your unique company employee identifier</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="fieldset">
+                        <legend>Role and Department</legend>
+                        
+                        <div class="grid grid-cols-2" style="gap: var(--space-md);">
+                            <div class="form-group">
+                                <label for="role" class="form-label required">HR Role</label>
+                                <select 
+                                    id="role" 
+                                    name="role" 
+                                    class="form-input" 
+                                    required 
+                                    aria-describedby="role-help"
+                                >
+                                    <option value="">Select HR Role</option>
+                                    <option value="hr">HR Specialist</option>
+                                    <option value="hr-manager">HR Manager</option>
+                                    <option value="hr-director">HR Director</option>
+                                    <option value="admin">System Administrator</option>
+                                </select>
+                                <div id="role-help" class="form-help">Your HR role determines system permissions</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="department" class="form-label required">Department</label>
+                                <select 
+                                    id="department" 
+                                    name="department" 
+                                    class="form-input" 
+                                    required 
+                                    aria-describedby="department-help"
+                                >
+                                    <option value="">Select Department</option>
+                                    <option value="Human Resources">Human Resources</option>
+                                    <option value="Talent Acquisition">Talent Acquisition</option>
+                                    <option value="Learning & Development">Learning & Development</option>
+                                    <option value="Compensation & Benefits">Compensation & Benefits</option>
+                                    <option value="Employee Relations">Employee Relations</option>
+                                    <option value="IT Administration">IT Administration</option>
+                                </select>
+                                <div id="department-help" class="form-help">Your primary department</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="position" class="form-label required">Job Title</label>
+                            <input 
+                                type="text" 
+                                id="position" 
+                                name="position" 
+                                class="form-input" 
+                                required 
+                                placeholder="Enter your job title"
+                                aria-describedby="position-help"
+                            >
+                            <div id="position-help" class="form-help">Your official job title</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="fieldset">
+                        <legend>Security and Access</legend>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label required">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                required 
+                                autocomplete="new-password"
+                                placeholder="Create a strong password"
+                                aria-describedby="password-help"
+                                minlength="8"
+                            >
+                            <div id="password-help" class="form-help">
+                                Password must be at least 8 characters with uppercase, lowercase, number, and special character
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label required">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                class="form-input" 
+                                required 
+                                autocomplete="new-password"
+                                placeholder="Confirm your password"
+                                aria-describedby="confirmPassword-help"
+                            >
+                            <div id="confirmPassword-help" class="form-help">Re-enter your password to confirm</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-checkbox">
+                                <input 
+                                    type="checkbox" 
+                                    id="termsAccepted" 
+                                    name="termsAccepted" 
+                                    required 
+                                    aria-describedby="terms-help"
+                                >
+                                <label for="termsAccepted">
+                                    I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                                </label>
+                            </div>
+                            <div id="terms-help" class="form-help">You must accept the terms to create an account</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-checkbox">
+                                <input 
+                                    type="checkbox" 
+                                    id="dataAccess" 
+                                    name="dataAccess" 
+                                    required 
+                                    aria-describedby="data-help"
+                                >
+                                <label for="dataAccess">
+                                    I understand that this role provides access to confidential employee data and I agree to maintain confidentiality
+                                </label>
+                            </div>
+                            <div id="data-help" class="form-help">HR administrators have access to sensitive employee information</div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="register-button" aria-describedby="register-button-help">
+                            <span id="register-button-text">Create HR Administrator Account</span>
+                            <div id="register-loading" class="loading" style="display: none;" aria-hidden="true"></div>
+                        </button>
+                        <div id="register-button-help" class="sr-only">Click to create your HR administrator account</div>
+                    </div>
+                </form>
+
+                <!-- Additional Actions -->
+                <footer class="card-footer" style="text-align: center;">
+                    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                        <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                            Already have an HR account?
+                        </p>
+                        <a href="login.html" class="btn btn-secondary" style="width: 100%;">
+                            Sign In to Existing Account
+                        </a>
+                        
+                        <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-sm); margin-top: var(--space-sm);">
+                            <p style="color: var(--text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--space-sm);">
+                                Need to register an employee instead?
+                            </p>
+                            <a href="register.html" class="btn btn-secondary" style="width: 100%;">
+                                Employee Registration
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-white); border-top: 1px solid var(--border-light); padding: var(--space-lg) 0; margin-top: var(--space-xl);">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    © 2024 HR Talent Management System. All rights reserved.
+                </p>
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    Version 1.0.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/accessibility.js"></script>
+    <script src="../../assets/js/error-handler.js"></script>
+    <script src="../../assets/js/performance-optimizer.js"></script>
+    <script src="../../assets/js/test-suite.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    
+    <!-- Page-specific initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('HR registration page loaded');
+            
+            // Add password strength validation
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            
+            if (passwordField && confirmPasswordField) {
+                // Real-time password validation
+                passwordField.addEventListener('input', function() {
+                    validatePasswordStrength(this.value);
+                });
+                
+                // Confirm password validation
+                confirmPasswordField.addEventListener('input', function() {
+                    validatePasswordMatch(passwordField.value, this.value);
+                });
+            }
+            
+            function validatePasswordStrength(password) {
+                const requirements = {
+                    length: password.length >= 8,
+                    uppercase: /[A-Z]/.test(password),
+                    lowercase: /[a-z]/.test(password),
+                    number: /\d/.test(password),
+                    special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+                };
+                
+                const strength = Object.values(requirements).filter(Boolean).length;
+                const strengthText = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'][strength - 1] || 'Very Weak';
+                
+                // Update password help text with strength indicator
+                const helpElement = document.getElementById('password-help');
+                if (helpElement && password.length > 0) {
+                    helpElement.innerHTML = `
+                        Password strength: <strong>${strengthText}</strong><br>
+                        Requirements: ${requirements.length ? '✓' : '✗'} 8+ chars, 
+                        ${requirements.uppercase ? '✓' : '✗'} uppercase, 
+                        ${requirements.lowercase ? '✓' : '✗'} lowercase, 
+                        ${requirements.number ? '✓' : '✗'} number, 
+                        ${requirements.special ? '✓' : '✗'} special char
+                    `;
+                }
+            }
+            
+            function validatePasswordMatch(password, confirmPassword) {
+                const confirmField = document.getElementById('confirmPassword');
+                const helpElement = document.getElementById('confirmPassword-help');
+                
+                if (confirmPassword.length > 0) {
+                    if (password === confirmPassword) {
+                        confirmField.classList.remove('error');
+                        helpElement.textContent = 'Passwords match ✓';
+                        helpElement.style.color = 'var(--color-secondary)';
+                    } else {
+                        confirmField.classList.add('error');
+                        helpElement.textContent = 'Passwords do not match';
+                        helpElement.style.color = 'var(--color-danger)';
+                    }
+                } else {
+                    confirmField.classList.remove('error');
+                    helpElement.textContent = 'Re-enter your password to confirm';
+                    helpElement.style.color = 'var(--text-secondary)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -60,6 +60,8 @@ class AuthModule {
       await this.handleLogin(form);
     } else if (formType === 'register') {
       await this.handleRegister(form);
+    } else if (formType === 'hr-register') {
+      await this.handleHRRegister(form);
     } else if (formType === 'forgot-password') {
       await this.handleForgotPassword(form);
     }
@@ -732,6 +734,241 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   /**
+   * Handle HR registration form submission
+   */
+  async handleHRRegister(form) {
+    if (this.isLoading) return;
+    
+    const formData = new FormData(form);
+    const registrationData = {
+      firstName: formData.get('firstName').trim(),
+      lastName: formData.get('lastName').trim(),
+      email: formData.get('email').trim(),
+      employeeId: formData.get('employeeId').trim(),
+      role: formData.get('role'),
+      department: formData.get('department'),
+      position: formData.get('position').trim(),
+      password: formData.get('password'),
+      confirmPassword: formData.get('confirmPassword'),
+      termsAccepted: formData.get('termsAccepted'),
+      dataAccess: formData.get('dataAccess')
+    };
+    
+    try {
+      // Clear previous errors
+      if (window.ErrorHandler) {
+        window.ErrorHandler.clearFormErrors(form);
+      }
+      
+      // Validate form
+      const validation = this.validateHRRegistrationForm(registrationData);
+      if (!validation.isValid) {
+        if (window.ErrorHandler) {
+          window.ErrorHandler.handleFormError(form, validation.errors);
+        }
+        return;
+      }
+      
+      // Show loading state
+      if (window.LoadingManager) {
+        window.LoadingManager.showFormLoading(form, 'Creating HR account...');
+      }
+      
+      // Simulate API call delay
+      await this.delay(2000);
+      
+      // Create new HR user
+      const newHRUser = this.createHRUser(registrationData);
+      
+      if (newHRUser) {
+        // Show success message
+        if (window.ErrorHandler) {
+          window.ErrorHandler.showNotification('HR administrator account created successfully! You can now log in with your credentials.', 'success', 5000);
+        }
+        
+        // Clear form after successful registration
+        setTimeout(() => {
+          form.reset();
+          // Redirect to login page
+          window.location.href = 'login.html';
+        }, 2000);
+      } else {
+        throw new Error('Failed to create HR administrator account. Please try again.');
+      }
+    } catch (error) {
+      console.error('HR registration error:', error);
+      if (window.ErrorHandler) {
+        window.ErrorHandler.handle(error, 'HR Registration');
+      }
+    } finally {
+      if (window.LoadingManager) {
+        window.LoadingManager.hideFormLoading(form);
+      }
+    }
+  }
+  
+  /**
+   * Validate HR registration form
+   */
+  validateHRRegistrationForm(data) {
+    const errors = {};
+    let isValid = true;
+    
+    // First name validation
+    if (!data.firstName) {
+      errors.firstName = 'First name is required';
+      isValid = false;
+    } else if (data.firstName.length < 2) {
+      errors.firstName = 'First name must be at least 2 characters long';
+      isValid = false;
+    }
+    
+    // Last name validation
+    if (!data.lastName) {
+      errors.lastName = 'Last name is required';
+      isValid = false;
+    } else if (data.lastName.length < 2) {
+      errors.lastName = 'Last name must be at least 2 characters long';
+      isValid = false;
+    }
+    
+    // Email validation
+    if (!data.email) {
+      errors.email = 'Email address is required';
+      isValid = false;
+    } else if (!this.isValidEmail(data.email)) {
+      errors.email = 'Please enter a valid email address';
+      isValid = false;
+    } else if (this.emailExists(data.email)) {
+      errors.email = 'This email address is already registered';
+      isValid = false;
+    }
+    
+    // Employee ID validation
+    if (!data.employeeId) {
+      errors.employeeId = 'Employee ID is required';
+      isValid = false;
+    } else if (data.employeeId.length < 3) {
+      errors.employeeId = 'Employee ID must be at least 3 characters long';
+      isValid = false;
+    }
+    
+    // Role validation
+    if (!data.role) {
+      errors.role = 'HR role is required';
+      isValid = false;
+    }
+    
+    // Department validation
+    if (!data.department) {
+      errors.department = 'Department is required';
+      isValid = false;
+    }
+    
+    // Position validation
+    if (!data.position) {
+      errors.position = 'Job title is required';
+      isValid = false;
+    } else if (data.position.length < 2) {
+      errors.position = 'Job title must be at least 2 characters long';
+      isValid = false;
+    }
+    
+    // Password validation
+    if (!data.password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    } else if (data.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters long';
+      isValid = false;
+    } else if (!this.isStrongPassword(data.password)) {
+      errors.password = 'Password must contain uppercase, lowercase, number, and special character';
+      isValid = false;
+    }
+    
+    // Confirm password validation
+    if (!data.confirmPassword) {
+      errors.confirmPassword = 'Please confirm the password';
+      isValid = false;
+    } else if (data.password !== data.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
+      isValid = false;
+    }
+    
+    // Terms acceptance validation
+    if (!data.termsAccepted) {
+      errors.termsAccepted = 'You must accept the terms of service';
+      isValid = false;
+    }
+    
+    // Data access agreement validation
+    if (!data.dataAccess) {
+      errors.dataAccess = 'You must acknowledge data access responsibilities';
+      isValid = false;
+    }
+    
+    return { isValid, errors };
+  }
+  
+  /**
+   * Check if password meets strength requirements
+   */
+  isStrongPassword(password) {
+    const requirements = {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    };
+    
+    return Object.values(requirements).every(Boolean);
+  }
+  
+  /**
+   * Create new HR user
+   */
+  createHRUser(data) {
+    const newHRUser = {
+      email: data.email,
+      password: data.password,
+      name: `${data.firstName} ${data.lastName}`,
+      role: data.role === 'admin' ? 'admin' : 'hr',
+      department: data.department,
+      position: data.position,
+      employeeId: data.employeeId,
+      isNewUser: true,
+      createdAt: new Date().toISOString(),
+      permissions: this.getHRPermissions(data.role)
+    };
+    
+    // Add to demo credentials
+    this.demoCredentials.hr.push(newHRUser);
+    
+    // Store in localStorage for persistence
+    const existingHRUsers = JSON.parse(localStorage.getItem(`${HRTalentApp.config.storagePrefix}hr_users`) || '[]');
+    existingHRUsers.push(newHRUser);
+    localStorage.setItem(`${HRTalentApp.config.storagePrefix}hr_users`, JSON.stringify(existingHRUsers));
+    
+    console.log('New HR user created:', newHRUser);
+    return newHRUser;
+  }
+  
+  /**
+   * Get HR permissions based on role
+   */
+  getHRPermissions(role) {
+    const permissions = {
+      'hr': ['view_employees', 'edit_employees', 'view_reports'],
+      'hr-manager': ['view_employees', 'edit_employees', 'view_reports', 'manage_team', 'approve_requests'],
+      'hr-director': ['view_employees', 'edit_employees', 'view_reports', 'manage_team', 'approve_requests', 'system_config'],
+      'admin': ['all_permissions']
+    };
+    
+    return permissions[role] || permissions['hr'];
+  }
+  
+  /**
    * Load existing employees from localStorage
    */
   loadExistingEmployees() {
@@ -744,5 +981,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
+    // Load existing HR users
+    const existingHRUsers = JSON.parse(localStorage.getItem(`${HRTalentApp.config.storagePrefix}hr_users`) || '[]');
+    existingHRUsers.forEach(hrUser => {
+      if (!this.emailExists(hrUser.email)) {
+        this.demoCredentials.hr.push(hrUser);
+      }
+    });
+    
     console.log('Loaded existing employees:', existingEmployees.length);
+    console.log('Loaded existing HR users:', existingHRUsers.length);
   }

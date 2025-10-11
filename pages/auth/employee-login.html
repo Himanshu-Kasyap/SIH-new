@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login to HR Talent Management System">
-    <title>Login - HR Talent Management System</title>
+    <meta name="description" content="Employee Login - HR Talent Management System">
+    <title>Employee Login - HR Talent Management System</title>
     
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
     
     <!-- Login page responsive styles -->
     <style>
-        /* Login page responsive enhancements */
+        /* Employee login page specific styles */
         .login-container {
             min-height: 80vh;
             display: flex;
@@ -32,6 +32,16 @@
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
+        }
+        
+        .employee-theme {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .employee-icon {
+            background-color: #ecfdf5;
+            color: #059669;
         }
         
         @media (max-width: 479px) {
@@ -90,6 +100,9 @@
                     HR Talent Management
                 </a>
             </div>
+            <div class="navbar-nav">
+                <a href="login.html">HR Login</a>
+            </div>
         </div>
     </nav>
 
@@ -99,23 +112,29 @@
             <div class="card login-card">
                 <!-- Login Form Header -->
                 <header class="card-header" style="text-align: center; margin-bottom: var(--space-lg);">
-                    <div class="metric-icon primary" style="margin: 0 auto var(--space-sm);" id="login-icon" aria-hidden="true">
-                        👥
+                    <div class="metric-icon employee-icon" style="margin: 0 auto var(--space-sm);" aria-hidden="true">
+                        🎯
                     </div>
-                    <h1 class="card-title" id="login-title">HR & Admin Login</h1>
-                    <p class="card-subtitle" id="login-subtitle">Access talent management tools and analytics</p>
+                    <h1 class="card-title">Employee Login</h1>
+                    <p class="card-subtitle">Access your development dashboard and career tools</p>
                 </header>
 
-                <!-- Error Message -->
-                <div id="error-message" class="notification error" style="display: none; position: relative; top: auto; right: auto; margin-bottom: var(--space-md); animation: none;" role="alert" aria-live="assertive">
+                <!-- Demo Credentials Info -->
+                <div class="alert alert-info" style="margin-bottom: var(--space-md);">
+                    <div class="alert-icon">ℹ</div>
+                    <div class="alert-message">
+                        <strong>Demo Credentials:</strong><br>
+                        Email: john.doe@company.com<br>
+                        Password: emp123
+                    </div>
                 </div>
 
                 <!-- Login Form -->
-                <form id="login-form" data-form="login" novalidate aria-labelledby="login-title" aria-describedby="login-subtitle">
-                    <input type="hidden" id="user-role" name="role" value="hr">
+                <form id="employee-login-form" data-form="login" novalidate aria-labelledby="login-title">
+                    <input type="hidden" name="role" value="employee">
                     
                     <fieldset class="fieldset">
-                        <legend class="sr-only">Login Credentials</legend>
+                        <legend class="sr-only">Employee Login Credentials</legend>
                         
                         <div class="form-group">
                             <label for="email" class="form-label required">Email Address</label>
@@ -126,12 +145,11 @@
                                 class="form-input" 
                                 required 
                                 autocomplete="email"
-                                placeholder="Enter your email address"
-                                aria-describedby="email-error email-help"
-                                aria-invalid="false"
+                                placeholder="Enter your work email address"
+                                aria-describedby="email-help"
+                                value="john.doe@company.com"
                             >
-                            <div id="email-help" class="form-help">Enter the email address associated with your account</div>
-                            <div id="email-error" class="form-error" style="display: none;" role="alert"></div>
+                            <div id="email-help" class="form-help">Use your company email address</div>
                         </div>
 
                         <div class="form-group">
@@ -144,51 +162,54 @@
                                 required 
                                 autocomplete="current-password"
                                 placeholder="Enter your password"
-                                aria-describedby="password-error password-help"
-                                aria-invalid="false"
+                                aria-describedby="password-help"
+                                value="emp123"
                             >
                             <div id="password-help" class="form-help">Enter your account password</div>
-                            <div id="password-error" class="form-error" style="display: none;" role="alert"></div>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="login-button" aria-describedby="login-button-help">
-                                <span id="login-button-text">Sign In</span>
+                            <button type="submit" class="btn btn-success btn-lg" style="width: 100%;" id="login-button" aria-describedby="login-button-help">
+                                <span id="login-button-text">Sign In to Dashboard</span>
                                 <div id="login-loading" class="loading" style="display: none;" aria-hidden="true"></div>
                             </button>
-                            <div id="login-button-help" class="sr-only">Click to sign in to your account</div>
+                            <div id="login-button-help" class="sr-only">Click to sign in to your employee dashboard</div>
                         </div>
                     </fieldset>
                 </form>
 
-                <!-- Role Switch -->
-                <footer class="card-footer" style="text-align: center;">
-                    <p style="margin-bottom: var(--space-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
-                        Not an HR user?
-                    </p>
-                    <button type="button" class="btn btn-secondary" id="switch-role" style="width: 100%;" aria-describedby="switch-role-help">
-                        Switch to Employee Login
-                    </button>
-                    <div id="switch-role-help" class="sr-only">Switch to employee login form</div>
-                </footer>
-
-                <!-- Additional Links -->
-                <nav style="text-align: center; margin-top: var(--space-md);" aria-label="Additional login options">
+                <!-- Additional Options -->
+                <div class="card-footer" style="text-align: center;">
                     <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
                         <a href="forgot-password.html" style="font-size: var(--font-size-sm); color: var(--text-secondary);">
                             Forgot your password?
                         </a>
                         
-                        <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-sm);">
-                            <p style="font-size: var(--font-size-xs); color: var(--text-secondary); margin-bottom: var(--space-xs);">
-                                Need an HR account?
+                        <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-sm); margin-top: var(--space-sm);">
+                            <p style="margin-bottom: var(--space-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                                Are you an HR administrator?
                             </p>
-                            <a href="hr-register.html" style="font-size: var(--font-size-sm); color: var(--color-primary); font-weight: var(--font-weight-medium);">
-                                Register as HR Administrator
+                            <a href="login.html" class="btn btn-secondary" style="width: 100%;">
+                                HR & Admin Login
                             </a>
                         </div>
                     </div>
-                </nav>
+                </div>
+
+                <!-- Employee Features Info -->
+                <div style="margin-top: var(--space-lg); padding: var(--space-md); background-color: var(--color-background); border-radius: var(--radius-lg);">
+                    <h3 style="font-size: var(--font-size-base); font-weight: var(--font-weight-semibold); margin-bottom: var(--space-sm); color: var(--text-primary);">
+                        Your Employee Dashboard Includes:
+                    </h3>
+                    <ul style="font-size: var(--font-size-sm); color: var(--text-secondary); line-height: 1.6; margin: 0; padding-left: var(--space-md);">
+                        <li>Personal development tracking</li>
+                        <li>Skill gap analysis and recommendations</li>
+                        <li>Individual development plans (IDPs)</li>
+                        <li>Training and learning opportunities</li>
+                        <li>Career progression insights</li>
+                        <li>Performance feedback and goals</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
@@ -218,16 +239,12 @@
     <!-- Page-specific initialization -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Login page loaded');
+            console.log('Employee login page loaded');
             
-            // Initialize login page based on URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const roleParam = urlParams.get('role');
-            
-            if (roleParam === 'employee') {
-                HRTalentApp.modules.auth.switchToEmployeeLogin();
-            } else {
-                HRTalentApp.modules.auth.switchToHRLogin();
+            // Set the form to employee mode
+            if (window.HRTalentApp && window.HRTalentApp.modules.auth) {
+                // Force employee mode for this page
+                window.HRTalentApp.modules.auth.currentRole = 'employee';
             }
         });
     </script>
