@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Development Plan - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/recommendations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be populated by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Individual Development Plan</h1>
+                <p class="page-description">Your personalized roadmap for career growth and skill development</p>
+            </div>
+
+            <!-- IDP Overview -->
+            <section class="idp-overview-section">
+                <div class="section-header">
+                    <h2>Development Plan Overview</h2>
+                    <div class="idp-actions">
+                        <button id="edit-idp-btn" class="btn btn-secondary">Edit Plan</button>
+                        <button id="export-idp-btn" class="btn btn-outline">Export PDF</button>
+                    </div>
+                </div>
+                
+                <div class="idp-summary-cards">
+                    <div class="summary-card">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-content">
+                            <h3 id="target-role-title">Loading...</h3>
+                            <p>Target Role</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <h3 id="confidence-score">--</h3>
+                            <p>Readiness Score</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="card-icon">⏱️</div>
+                        <div class="card-content">
+                            <h3 id="timeline-months">-- months</h3>
+                            <p>Estimated Timeline</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="card-icon">📚</div>
+                        <div class="card-content">
+                            <h3 id="learning-items-count">--</h3>
+                            <p>Learning Activities</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Tracking -->
+            <section class="progress-tracking-section">
+                <div class="section-header">
+                    <h2>Progress Tracking</h2>
+                    <p>Track your development journey and milestones</p>
+                </div>
+                
+                <div class="progress-overview">
+                    <div class="overall-progress">
+                        <h3>Overall Progress</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div id="overall-progress-fill" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span id="overall-progress-text" class="progress-text">0% Complete</span>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone-indicators">
+                        <div class="milestone" data-milestone="25">
+                            <div class="milestone-marker"></div>
+                            <span>25%</span>
+                        </div>
+                        <div class="milestone" data-milestone="50">
+                            <div class="milestone-marker"></div>
+                            <span>50%</span>
+                        </div>
+                        <div class="milestone" data-milestone="75">
+                            <div class="milestone-marker"></div>
+                            <span>75%</span>
+                        </div>
+                        <div class="milestone" data-milestone="100">
+                            <div class="milestone-marker"></div>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Development Timeline -->
+            <section class="development-timeline-section">
+                <div class="section-header">
+                    <h2>Development Timeline</h2>
+                    <p>Your structured learning path with tasks and milestones</p>
+                </div>
+                
+                <div class="timeline-controls">
+                    <div class="view-toggle">
+                        <button id="timeline-view-btn" class="btn btn-sm btn-primary">Timeline View</button>
+                        <button id="kanban-view-btn" class="btn btn-sm btn-outline">Kanban View</button>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <select id="priority-filter" class="form-select">
+                            <option value="">All Priorities</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                        
+                        <select id="status-filter" class="form-select">
+                            <option value="">All Status</option>
+                            <option value="not_started">Not Started</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="timeline-container" class="timeline-container">
+                    <!-- Timeline will be populated by JavaScript -->
+                </div>
+                
+                <div id="kanban-container" class="kanban-container" style="display: none;">
+                    <div class="kanban-column">
+                        <h3>Not Started</h3>
+                        <div id="kanban-not-started" class="kanban-items">
+                            <!-- Items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="kanban-column">
+                        <h3>In Progress</h3>
+                        <div id="kanban-in-progress" class="kanban-items">
+                            <!-- Items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="kanban-column">
+                        <h3>Completed</h3>
+                        <div id="kanban-completed" class="kanban-items">
+                            <!-- Items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skill Development Tracking -->
+            <section class="skill-development-section">
+                <div class="section-header">
+                    <h2>Skill Development Progress</h2>
+                    <p>Track your skill improvements over time</p>
+                </div>
+                
+                <div class="skills-progress-grid" id="skills-progress-grid">
+                    <!-- Skill progress cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Notes and Reflections -->
+            <section class="notes-section">
+                <div class="section-header">
+                    <h2>Notes & Reflections</h2>
+                    <p>Document your learning journey and insights</p>
+                </div>
+                
+                <div class="notes-container">
+                    <div class="add-note-form">
+                        <textarea id="new-note-text" placeholder="Add a note about your progress, insights, or challenges..." rows="3"></textarea>
+                        <div class="note-form-actions">
+                            <select id="note-category" class="form-select">
+                                <option value="general">General</option>
+                                <option value="achievement">Achievement</option>
+                                <option value="challenge">Challenge</option>
+                                <option value="insight">Insight</option>
+                                <option value="goal">Goal</option>
+                            </select>
+                            <button id="add-note-btn" class="btn btn-primary">Add Note</button>
+                        </div>
+                    </div>
+                    
+                    <div class="notes-list" id="notes-list">
+                        <!-- Notes will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div id="task-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-task-title">Task Details</h3>
+                <button class="modal-close" onclick="idpPage.closeTaskModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-task-content">
+                    <!-- Task details will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-mark-complete-btn" class="btn btn-primary">Mark Complete</button>
+                <button id="modal-mark-progress-btn" class="btn btn-secondary">Mark In Progress</button>
+                <button class="btn btn-outline" onclick="idpPage.closeTaskModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading your development plan...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/idp.js"></script>
+</body>
+</html>

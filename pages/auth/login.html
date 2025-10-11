@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to HR Talent Management System">
+    <title>Login - HR Talent Management System</title>
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    
+    <!-- Login page responsive styles -->
+    <style>
+        /* Login page responsive enhancements */
+        .login-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg) 0;
+        }
+        
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 479px) {
+            .login-container {
+                min-height: 70vh;
+                padding: var(--space-md) 0;
+            }
+            
+            .login-card {
+                max-width: none;
+                margin: 0 var(--space-sm);
+            }
+            
+            .card-header {
+                margin-bottom: var(--space-md) !important;
+            }
+            
+            .metric-icon {
+                width: 40px !important;
+                height: 40px !important;
+                font-size: var(--font-size-lg) !important;
+            }
+            
+            .card-title {
+                font-size: var(--font-size-lg) !important;
+            }
+            
+            .card-subtitle {
+                font-size: var(--font-size-sm) !important;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .login-card {
+                margin: 0 var(--space-xs);
+            }
+        }
+    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Skip links for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#login-form" class="skip-link">Skip to login form</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Navigation Header -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="../../index.html" aria-label="HR Talent Management System Home">
+                    HR Talent Management
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" role="main" id="main-content">
+        <div class="login-container">
+            <div class="card login-card">
+                <!-- Login Form Header -->
+                <header class="card-header" style="text-align: center; margin-bottom: var(--space-lg);">
+                    <div class="metric-icon primary" style="margin: 0 auto var(--space-sm);" id="login-icon" aria-hidden="true">
+                        👥
+                    </div>
+                    <h1 class="card-title" id="login-title">HR & Admin Login</h1>
+                    <p class="card-subtitle" id="login-subtitle">Access talent management tools and analytics</p>
+                </header>
+
+                <!-- Error Message -->
+                <div id="error-message" class="notification error" style="display: none; position: relative; top: auto; right: auto; margin-bottom: var(--space-md); animation: none;" role="alert" aria-live="assertive">
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" data-form="login" novalidate aria-labelledby="login-title" aria-describedby="login-subtitle">
+                    <input type="hidden" id="user-role" name="role" value="hr">
+                    
+                    <fieldset class="fieldset">
+                        <legend class="sr-only">Login Credentials</legend>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label required">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                required 
+                                autocomplete="email"
+                                placeholder="Enter your email address"
+                                aria-describedby="email-error email-help"
+                                aria-invalid="false"
+                            >
+                            <div id="email-help" class="form-help">Enter the email address associated with your account</div>
+                            <div id="email-error" class="form-error" style="display: none;" role="alert"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label required">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                required 
+                                autocomplete="current-password"
+                                placeholder="Enter your password"
+                                aria-describedby="password-error password-help"
+                                aria-invalid="false"
+                            >
+                            <div id="password-help" class="form-help">Enter your account password</div>
+                            <div id="password-error" class="form-error" style="display: none;" role="alert"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="login-button" aria-describedby="login-button-help">
+                                <span id="login-button-text">Sign In</span>
+                                <div id="login-loading" class="loading" style="display: none;" aria-hidden="true"></div>
+                            </button>
+                            <div id="login-button-help" class="sr-only">Click to sign in to your account</div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <!-- Role Switch -->
+                <footer class="card-footer" style="text-align: center;">
+                    <p style="margin-bottom: var(--space-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                        Not an HR user?
+                    </p>
+                    <button type="button" class="btn btn-secondary" id="switch-role" style="width: 100%;" aria-describedby="switch-role-help">
+                        Switch to Employee Login
+                    </button>
+                    <div id="switch-role-help" class="sr-only">Switch to employee login form</div>
+                </footer>
+
+                <!-- Additional Links -->
+                <nav style="text-align: center; margin-top: var(--space-md);" aria-label="Additional login options">
+                    <a href="forgot-password.html" style="font-size: var(--font-size-sm); color: var(--text-secondary);" aria-describedby="forgot-password-help">
+                        Forgot your password?
+                    </a>
+                    <div id="forgot-password-help" class="sr-only">Reset your password if you've forgotten it</div>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-white); border-top: 1px solid var(--border-light); padding: var(--space-lg) 0; margin-top: var(--space-xl);">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    © 2024 HR Talent Management System. All rights reserved.
+                </p>
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    Version 1.0.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/accessibility.js"></script>
+    <script src="../../assets/js/error-handler.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    
+    <!-- Page-specific initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Login page loaded');
+            
+            // Initialize login page based on URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const roleParam = urlParams.get('role');
+            
+            if (roleParam === 'employee') {
+                HRTalentApp.modules.auth.switchToEmployeeLogin();
+            } else {
+                HRTalentApp.modules.auth.switchToHRLogin();
+            }
+        });
+    </script>
+</body>
+</html>

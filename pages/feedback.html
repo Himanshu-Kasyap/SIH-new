@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - HR Talent Management</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages/feedback.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="feedback-page">
+        <div class="page-header">
+            <h1>Provide Feedback</h1>
+            <p>Help us improve the HR Talent Management System</p>
+        </div>
+
+        <div class="feedback-container">
+            <div class="feedback-form-section">
+                <h2>Submit Feedback</h2>
+                <form id="feedback-form" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedback-type">Feedback Type</label>
+                        <select id="feedback-type" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="improvement">Improvement Suggestion</option>
+                            <option value="general">General Feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback-category">Category</label>
+                        <select id="feedback-category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="dashboard">Dashboard</option>
+                            <option value="profile">Profile Management</option>
+                            <option value="skills">Skill Assessment</option>
+                            <option value="recommendations">AI Recommendations</option>
+                            <option value="training">Training & Learning</option>
+                            <option value="reports">Reports & Analytics</option>
+                            <option value="navigation">Navigation & UI</option>
+                            <option value="performance">Performance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback-title">Title</label>
+                        <input type="text" id="feedback-title" name="title" required 
+                               placeholder="Brief description of your feedback">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback-description">Description</label>
+                        <textarea id="feedback-description" name="description" rows="5" required
+                                  placeholder="Please provide detailed information about your feedback..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback-priority">Priority</label>
+                        <select id="feedback-priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback-rating">Overall System Rating</label>
+                        <div class="rating-input">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5" class="star">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" class="star">★</label>
+                            <input type="radio" id="star3" name="rating" value="3" checked>
+                            <label for="star3" class="star">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" class="star">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" class="star">★</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="anonymous-feedback" name="anonymous">
+                            Submit anonymously
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </form>
+            </div>
+
+            <div class="feedback-info-section">
+                <div class="info-card">
+                    <h3>Feedback Guidelines</h3>
+                    <ul>
+                        <li>Be specific and detailed in your descriptions</li>
+                        <li>Include steps to reproduce issues when reporting bugs</li>
+                        <li>Suggest concrete improvements when possible</li>
+                        <li>Be respectful and constructive in your feedback</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>What Happens Next?</h3>
+                    <ol>
+                        <li>Your feedback is reviewed by our team</li>
+                        <li>We prioritize based on impact and feasibility</li>
+                        <li>Implementation is tracked and communicated</li>
+                        <li>You'll be notified of any updates</li>
+                    </ol>
+                </div>
+
+                <div class="info-card">
+                    <h3>Recent Improvements</h3>
+                    <div id="recent-improvements">
+                        <!-- Recent improvements will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-feedback-section">
+            <h2>My Previous Feedback</h2>
+            <div class="my-feedback-list" id="my-feedback-list">
+                <!-- User's previous feedback will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/components/navigation.js"></script>
+    <script src="../assets/js/pages/feedback.js"></script>
+</body>
+</html>

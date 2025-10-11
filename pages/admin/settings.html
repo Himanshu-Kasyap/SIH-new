@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/admin.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="admin-settings">
+        <div class="page-header">
+            <h1>Admin Settings</h1>
+            <p>Manage users, roles, permissions, and system configuration</p>
+        </div>
+
+        <div class="settings-tabs">
+            <button class="tab-button active" data-tab="users">User Management</button>
+            <button class="tab-button" data-tab="roles">Role Management</button>
+            <button class="tab-button" data-tab="permissions">Permissions</button>
+            <button class="tab-button" data-tab="ai-config">AI Configuration</button>
+            <button class="tab-button" data-tab="feedback">Feedback Management</button>
+        </div>
+
+        <!-- User Management Tab -->
+        <div id="users-tab" class="tab-content active">
+            <div class="section-header">
+                <h2>User Management</h2>
+                <button class="btn btn-primary" id="add-user-btn">Add New User</button>
+            </div>
+            
+            <div class="users-filters">
+                <input type="text" id="user-search" placeholder="Search users..." class="search-input">
+                <select id="role-filter" class="filter-select">
+                    <option value="">All Roles</option>
+                    <option value="admin">Admin</option>
+                    <option value="hr">HR</option>
+                    <option value="employee">Employee</option>
+                </select>
+                <select id="department-filter" class="filter-select">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+
+            <div class="users-table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Role Management Tab -->
+        <div id="roles-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Role Management</h2>
+                <button class="btn btn-primary" id="add-role-btn">Create New Role</button>
+            </div>
+            
+            <div class="roles-grid" id="roles-grid">
+                <!-- Roles will be populated here -->
+            </div>
+        </div>
+
+        <!-- Permissions Tab -->
+        <div id="permissions-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Permission Management</h2>
+                <p>Configure role-based access control for different features</p>
+            </div>
+            
+            <div class="permissions-matrix">
+                <table class="permissions-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Admin</th>
+                            <th>HR</th>
+                            <th>Employee</th>
+                        </tr>
+                    </thead>
+                    <tbody id="permissions-table-body">
+                        <!-- Permissions will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- AI Configuration Tab -->
+        <div id="ai-config-tab" class="tab-content">
+            <div class="section-header">
+                <h2>AI Configuration</h2>
+                <p>Configure AI model settings and recommendation parameters</p>
+            </div>
+            
+            <form id="ai-config-form" class="config-form">
+                <div class="config-section">
+                    <h3>API Configuration</h3>
+                    <div class="form-group">
+                        <label for="openai-api-key">OpenAI API Key</label>
+                        <input type="password" id="openai-api-key" name="openaiApiKey" placeholder="sk-...">
+                        <small>Used for AI-powered recommendations and analysis</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="model-name">Model Name</label>
+                        <select id="model-name" name="modelName">
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>9-Box Matrix Weights</h3>
+                    <div class="form-group">
+                        <label for="performance-weight">Performance Weight (%)</label>
+                        <input type="range" id="performance-weight" name="performanceWeight" min="0" max="100" value="50">
+                        <span class="range-value">50%</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="potential-weight">Potential Weight (%)</label>
+                        <input type="range" id="potential-weight" name="potentialWeight" min="0" max="100" value="50">
+                        <span class="range-value">50%</span>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Recommendation Settings</h3>
+                    <div class="form-group">
+                        <label for="recommendation-threshold">Recommendation Confidence Threshold</label>
+                        <input type="range" id="recommendation-threshold" name="recommendationThreshold" min="0" max="100" value="70">
+                        <span class="range-value">70%</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="max-recommendations">Maximum Recommendations per User</label>
+                        <input type="number" id="max-recommendations" name="maxRecommendations" min="1" max="20" value="5">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Configuration</button>
+            </form>
+        </div>
+
+        <!-- Feedback Management Tab -->
+        <div id="feedback-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Feedback Management</h2>
+                <p>Manage user feedback and system improvement suggestions</p>
+            </div>
+            
+            <div class="feedback-stats">
+                <div class="stat-card">
+                    <h3 id="total-feedback">0</h3>
+                    <p>Total Feedback</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pending-feedback">0</h3>
+                    <p>Pending Review</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="implemented-suggestions">0</h3>
+                    <p>Implemented</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="avg-rating">0.0</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+
+            <div class="feedback-filters">
+                <select id="feedback-type-filter" class="filter-select">
+                    <option value="">All Types</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="feature">Feature Request</option>
+                    <option value="improvement">Improvement</option>
+                    <option value="general">General Feedback</option>
+                </select>
+                <select id="feedback-status-filter" class="filter-select">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-review">In Review</option>
+                    <option value="implemented">Implemented</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+                <select id="feedback-priority-filter" class="filter-select">
+                    <option value="">All Priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+
+            <div class="feedback-list" id="feedback-list">
+                <!-- Feedback items will be populated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- User Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="user-modal-title">Add New User</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="user-form" class="modal-form">
+                <input type="hidden" id="user-id" name="id">
+                <div class="form-group">
+                    <label for="user-name">Full Name</label>
+                    <input type="text" id="user-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-role">Role</label>
+                    <select id="user-role" name="role" required>
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="hr">HR</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user-department">Department</label>
+                    <input type="text" id="user-department" name="department" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-position">Position</label>
+                    <input type="text" id="user-position" name="position" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-status">Status</label>
+                    <select id="user-status" name="status">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-user">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Role Modal -->
+    <div id="role-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="role-modal-title">Create New Role</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="role-form" class="modal-form">
+                <input type="hidden" id="role-id" name="id">
+                <div class="form-group">
+                    <label for="role-title">Role Title</label>
+                    <input type="text" id="role-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="role-department">Department</label>
+                    <input type="text" id="role-department" name="department" required>
+                </div>
+                <div class="form-group">
+                    <label for="role-level">Level</label>
+                    <select id="role-level" name="level" required>
+                        <option value="">Select Level</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                        <option value="lead">Lead</option>
+                        <option value="manager">Manager</option>
+                        <option value="director">Director</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="role-description">Description</label>
+                    <textarea id="role-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-role">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Role</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Feedback Detail Modal -->
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="feedback-modal-title">Feedback Details</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="feedback-detail" id="feedback-detail">
+                <!-- Feedback details will be populated here -->
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="close-feedback">Close</button>
+                <button type="button" class="btn btn-warning" id="reject-feedback">Reject</button>
+                <button type="button" class="btn btn-primary" id="implement-feedback">Mark as Implemented</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/admin.js"></script>
+</body>
+</html>

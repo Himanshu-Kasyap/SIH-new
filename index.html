@@ -3,9 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="HR Talent Management System - Comprehensive talent development and succession planning platform">
+    <meta name="theme-color" content="#2563eb">
+    <title>HR Talent Management System</title>
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- Landing page responsive styles -->
+    <style>
+        /* Landing page responsive enhancements */
+        @media (max-width: 767px) {
+            .welcome-section {
+                padding: var(--space-xl) 0 !important;
+            }
+            
+            .welcome-section h1 {
+                font-size: var(--font-size-2xl) !important;
+                margin-bottom: var(--space-md);
+            }
+            
+            .welcome-section p {
+                font-size: var(--font-size-base) !important;
+                margin-bottom: var(--space-md) !important;
+            }
+            
+            .features-section {
+                padding: var(--space-xl) 0 !important;
+            }
+            
+            .features-section h2 {
+                font-size: var(--font-size-xl) !important;
+                margin-bottom: var(--space-lg) !important;
+            }
+        }
+        
+        @media (max-width: 479px) {
+            .welcome-section {
+                padding: var(--space-lg) 0 !important;
+            }
+            
+            .welcome-section h1 {
+                font-size: var(--font-size-xl) !important;
+            }
+            
+            .card ul {
+                font-size: var(--font-size-sm);
+                padding-left: var(--space-md);
+            }
+            
+            .card ul li {
+                margin-bottom: var(--space-xs);
+            }
+        }
+    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
+    <!-- Skip links for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-nav" class="skip-link">Skip to navigation</a>
     
+    <!-- Live region for announcements -->
+    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Navigation Header -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="index.html" aria-label="HR Talent Management System Home" aria-current="page">
+                    <span aria-hidden="true">🏢</span>
+                    <span>HR Talent Management</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span class="sr-only">Menu</span>
+            </button>
+            
+            <!-- Navigation will be populated by JavaScript based on authentication state -->
+            <ul class="navbar-nav" id="main-nav" role="menubar">
+                <!-- Navigation items will be dynamically inserted -->
+            </ul>
+            
+            <!-- User dropdown (hidden until authenticated) -->
+            <div class="navbar-user" id="user-nav" style="display: none;">
+                <div class="user-dropdown" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+                    <span id="user-name">User</span>
+                    <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="navbar-nav" id="mobile-nav-items" role="menubar">
+                    <!-- Mobile navigation items will be dynamically inserted -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" role="main" id="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section" style="text-align: center; padding: var(--space-2xl) 0;" aria-labelledby="welcome-heading">
+            <h1 id="welcome-heading">Welcome to HR Talent Management System</h1>
+            <p class="mb-lg" style="font-size: var(--font-size-lg); color: var(--text-secondary); max-width: 600px; margin: 0 auto var(--space-lg);">
+                Empower your organization with AI-driven talent development, succession planning, and personalized career growth paths.
+            </p>
+            
+            <!-- Login Cards -->
+            <div class="grid grid-cols-2" style="max-width: 800px; margin: 0 auto; gap: var(--space-xl);" role="group" aria-labelledby="login-options">
+                <h2 id="login-options" class="sr-only">Login Options</h2>
+                
+                <!-- HR/Admin Login Card -->
+                <article class="card" style="text-align: center;" aria-labelledby="hr-login-title">
+                    <div class="card-header">
+                        <h3 class="card-title" id="hr-login-title">HR & Administrators</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric-icon primary" style="margin: 0 auto var(--space-md);" aria-hidden="true">
+                            👥
+                        </div>
+                        <p class="mb-md">Access comprehensive talent analytics, succession planning tools, and employee development insights.</p>
+                        <ul style="text-align: left; margin-bottom: var(--space-md);" aria-label="HR features">
+                            <li>9-Box Matrix Visualization</li>
+                            <li>AI-Powered Recommendations</li>
+                            <li>Succession Planning Reports</li>
+                            <li>Role & Competency Management</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-lg w-full" data-navigate="pages/auth/login.html?role=hr" aria-describedby="hr-login-desc">
+                            HR Login
+                        </button>
+                        <div id="hr-login-desc" class="sr-only">Login as HR administrator to access talent management tools</div>
+                    </div>
+                </article>
+                
+                <!-- Employee Login Card -->
+                <article class="card" style="text-align: center;" aria-labelledby="employee-login-title">
+                    <div class="card-header">
+                        <h3 class="card-title" id="employee-login-title">Employees</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric-icon success" style="margin: 0 auto var(--space-md);" aria-hidden="true">
+                            🎯
+                        </div>
+                        <p class="mb-md">Track your career development, access personalized learning paths, and manage your professional growth.</p>
+                        <ul style="text-align: left; margin-bottom: var(--space-md);" aria-label="Employee features">
+                            <li>Personal Development Dashboard</li>
+                            <li>Skill Gap Analysis</li>
+                            <li>Individual Development Plans</li>
+                            <li>Training Recommendations</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success btn-lg w-full" data-navigate="pages/auth/login.html?role=employee" aria-describedby="employee-login-desc">
+                            Employee Login
+                        </button>
+                        <div id="employee-login-desc" class="sr-only">Login as employee to access personal development tools</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Features Overview -->
+        <section class="features-section" style="padding: var(--space-2xl) 0; border-top: 1px solid var(--border-light);" aria-labelledby="features-heading">
+            <h2 id="features-heading" style="text-align: center; margin-bottom: var(--space-xl);">Key Features</h2>
+            
+            <div class="grid grid-cols-3 gap-md" role="list">
+                <article class="metric-card" role="listitem" aria-labelledby="ai-feature">
+                    <div class="metric-icon primary" aria-hidden="true">
+                        🤖
+                    </div>
+                    <h3 class="metric-label" id="ai-feature">AI-Powered Insights</h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: var(--space-xs);">
+                        Advanced algorithms analyze skills, performance, and potential to provide personalized development recommendations.
+                    </p>
+                </article>
+                
+                <article class="metric-card" role="listitem" aria-labelledby="matrix-feature">
+                    <div class="metric-icon success" aria-hidden="true">
+                        📊
+                    </div>
+                    <h3 class="metric-label" id="matrix-feature">9-Box Matrix</h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: var(--space-xs);">
+                        Visual performance vs potential mapping for effective succession planning and talent identification.
+                    </p>
+                </article>
+                
+                <article class="metric-card" role="listitem" aria-labelledby="learning-feature">
+                    <div class="metric-icon warning" aria-hidden="true">
+                        🎓
+                    </div>
+                    <h3 class="metric-label" id="learning-feature">Learning Integration</h3>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: var(--space-xs);">
+                        Seamless integration with training platforms and personalized learning path recommendations.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-white); border-top: 1px solid var(--border-light); padding: var(--space-lg) 0; margin-top: var(--space-2xl);">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    © 2024 HR Talent Management System. All rights reserved.
+                </p>
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    Version 1.0.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/accessibility.js"></script>
+    <script src="assets/js/error-handler.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Page-specific initialization -->
+    <script>
+        // Initialize landing page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Landing page loaded');
+            
+            // Add any landing page specific logic here
+            // For example, checking if user is already logged in and redirecting
+            if (HRTalentApp.state.isAuthenticated) {
+                const user = HRTalentApp.state.currentUser;
+                const redirectUrl = user.role === 'hr' || user.role === 'admin' 
+                    ? 'pages/dashboard/hr.html' 
+                    : 'pages/dashboard/employee.html';
+                
+                console.log('User already authenticated, redirecting to:', redirectUrl);
+                window.location.href = redirectUrl;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/profile.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be loaded by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="header-left">
+                    <h1>Edit Profile</h1>
+                    <p class="subtitle">Update your personal and professional information</p>
+                </div>
+                <div class="header-actions">
+                    <button id="cancel-edit-btn" class="btn btn-secondary">
+                        <span class="icon">✕</span>
+                        Cancel
+                    </button>
+                    <button id="save-profile-btn" class="btn btn-primary">
+                        <span class="icon">💾</span>
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <form id="profile-edit-form" class="profile-form">
+                    <!-- Basic Information -->
+                    <div class="form-section card">
+                        <h3 class="section-title">Basic Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="edit-name" class="required">Full Name</label>
+                                <input type="text" id="edit-name" name="name" required 
+                                       placeholder="Enter your full name" maxlength="100">
+                                <div class="field-error" id="name-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-email" class="required">Email Address</label>
+                                <input type="email" id="edit-email" name="email" required 
+                                       placeholder="Enter your email address" maxlength="100">
+                                <div class="field-error" id="email-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-position" class="required">Position</label>
+                                <input type="text" id="edit-position" name="position" required 
+                                       placeholder="Enter your job title" maxlength="100">
+                                <div class="field-error" id="position-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-department" class="required">Department</label>
+                                <select id="edit-department" name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Product">Product</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Human Resources">Human Resources</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Operations">Operations</option>
+                                    <option value="Customer Success">Customer Success</option>
+                                </select>
+                                <div class="field-error" id="department-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-experience" class="required">Years of Experience</label>
+                                <input type="number" id="edit-experience" name="experience" required 
+                                       min="0" max="50" placeholder="0">
+                                <div class="field-error" id="experience-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-role">Role</label>
+                                <select id="edit-role" name="role">
+                                    <option value="employee">Employee</option>
+                                    <option value="hr">HR</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <div class="field-help">Role determines system access level</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="form-section card">
+                        <h3 class="section-title">
+                            Education
+                            <button type="button" id="add-education-btn" class="btn btn-small btn-secondary">
+                                <span class="icon">+</span>
+                                Add Education
+                            </button>
+                        </h3>
+                        <div id="education-container" class="education-container">
+                            <!-- Education items will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Performance Metrics (HR/Admin only) -->
+                    <div id="performance-section" class="form-section card" style="display: none;">
+                        <h3 class="section-title">Performance Metrics</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="edit-performance">Performance Rating</label>
+                                <div class="rating-input">
+                                    <input type="range" id="edit-performance" name="performance" 
+                                           min="1" max="5" value="3" class="rating-slider">
+                                    <div class="rating-labels">
+                                        <span>1 - Poor</span>
+                                        <span>2 - Below Average</span>
+                                        <span>3 - Average</span>
+                                        <span>4 - Good</span>
+                                        <span>5 - Excellent</span>
+                                    </div>
+                                    <div class="rating-value" id="performance-display">3</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit-potential">Potential Rating</label>
+                                <div class="rating-input">
+                                    <input type="range" id="edit-potential" name="potential" 
+                                           min="1" max="5" value="3" class="rating-slider">
+                                    <div class="rating-labels">
+                                        <span>1 - Low</span>
+                                        <span>2 - Limited</span>
+                                        <span>3 - Moderate</span>
+                                        <span>4 - High</span>
+                                        <span>5 - Very High</span>
+                                    </div>
+                                    <div class="rating-value" id="potential-display">3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements & Feedback -->
+                    <div id="achievements-section" class="form-section card">
+                        <h3 class="section-title">
+                            Achievements & Feedback
+                            <button type="button" id="add-achievement-btn" class="btn btn-small btn-secondary">
+                                <span class="icon">+</span>
+                                Add Achievement
+                            </button>
+                        </h3>
+                        <div id="achievements-container" class="achievements-container">
+                            <!-- Achievements will be dynamically loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Saving profile...</p>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Success</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Profile updated successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal('success-modal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred while saving the profile.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('error-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Achievement Modal -->
+    <div id="add-achievement-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Achievement</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-achievement-form">
+                    <div class="form-group">
+                        <label for="achievement-type" class="required">Type</label>
+                        <select id="achievement-type" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="training">Training Completed</option>
+                            <option value="certification">Certification</option>
+                            <option value="project">Project Achievement</option>
+                            <option value="feedback">Feedback/Recognition</option>
+                            <option value="milestone">Career Milestone</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="field-error" id="achievement-type-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-title" class="required">Title</label>
+                        <input type="text" id="achievement-title" name="title" required 
+                               placeholder="e.g., AWS Solutions Architect Certification" maxlength="100">
+                        <div class="field-error" id="achievement-title-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-description">Description</label>
+                        <textarea id="achievement-description" name="description" rows="3"
+                                  placeholder="Describe the achievement, what you learned, or the impact..." maxlength="500"></textarea>
+                        <div class="field-error" id="achievement-description-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-provider">Provider/Organization</label>
+                        <input type="text" id="achievement-provider" name="provider" 
+                               placeholder="e.g., Amazon Web Services, Company Name" maxlength="100">
+                        <div class="field-error" id="achievement-provider-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-date" class="required">Date Achieved</label>
+                        <input type="date" id="achievement-date" name="date" required>
+                        <div class="field-error" id="achievement-date-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-skills">Related Skills</label>
+                        <input type="text" id="achievement-skills" name="skills" 
+                               placeholder="e.g., Cloud Computing, Leadership (comma-separated)" maxlength="200">
+                        <div class="field-help">Skills that this achievement demonstrates or improves</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="achievement-url">Certificate/Evidence URL</label>
+                        <input type="url" id="achievement-url" name="url" 
+                               placeholder="https://..." maxlength="300">
+                        <div class="field-help">Link to certificate, project, or other evidence</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('add-achievement-modal')">Cancel</button>
+                <button type="submit" form="add-achievement-form" class="btn btn-primary">Add Achievement</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Achievement Modal -->
+    <div id="edit-achievement-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Achievement</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-achievement-form">
+                    <div class="form-group">
+                        <label for="edit-achievement-type" class="required">Type</label>
+                        <select id="edit-achievement-type" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="training">Training Completed</option>
+                            <option value="certification">Certification</option>
+                            <option value="project">Project Achievement</option>
+                            <option value="feedback">Feedback/Recognition</option>
+                            <option value="milestone">Career Milestone</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="field-error" id="edit-achievement-type-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-title" class="required">Title</label>
+                        <input type="text" id="edit-achievement-title" name="title" required maxlength="100">
+                        <div class="field-error" id="edit-achievement-title-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-description">Description</label>
+                        <textarea id="edit-achievement-description" name="description" rows="3" maxlength="500"></textarea>
+                        <div class="field-error" id="edit-achievement-description-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-provider">Provider/Organization</label>
+                        <input type="text" id="edit-achievement-provider" name="provider" maxlength="100">
+                        <div class="field-error" id="edit-achievement-provider-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-date" class="required">Date Achieved</label>
+                        <input type="date" id="edit-achievement-date" name="date" required>
+                        <div class="field-error" id="edit-achievement-date-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-skills">Related Skills</label>
+                        <input type="text" id="edit-achievement-skills" name="skills" maxlength="200">
+                        <div class="field-help">Skills that this achievement demonstrates or improves</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-achievement-url">Certificate/Evidence URL</label>
+                        <input type="url" id="edit-achievement-url" name="url" maxlength="300">
+                        <div class="field-help">Link to certificate, project, or other evidence</div>
+                    </div>
+
+                    <input type="hidden" id="edit-achievement-id" name="id">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete-achievement-btn">Delete</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('edit-achievement-modal')">Cancel</button>
+                <button type="submit" form="edit-achievement-form" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Changes</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>You have unsaved changes. Are you sure you want to leave without saving?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('confirm-modal')">Stay</button>
+                <button class="btn btn-danger" id="confirm-leave-btn">Leave</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/profile.js"></script>
+</body>
+</html>

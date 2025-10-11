@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Catalog - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/catalog.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title">Training Catalog</h1>
+                    <p class="page-description">Discover internal and external courses to advance your skills and career</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="suggestCourseBtn">
+                        <span class="btn-icon">💡</span>
+                        Get AI Suggestions
+                    </button>
+                </div>
+            </header>
+
+            <div class="filters-section">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search courses by title, skills, or provider...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="categoryFilter" class="filter-label">Category</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Leadership">Leadership</option>
+                            <option value="Communication">Communication</option>
+                            <option value="Project Management">Project Management</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                            <option value="Design">Design</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="providerFilter" class="filter-label">Provider</label>
+                        <select id="providerFilter" class="filter-select">
+                            <option value="">All Providers</option>
+                            <option value="Internal">Internal</option>
+                            <option value="Coursera">Coursera</option>
+                            <option value="LinkedIn Learning">LinkedIn Learning</option>
+                            <option value="Udemy">Udemy</option>
+                            <option value="Pluralsight">Pluralsight</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="durationFilter" class="filter-label">Duration</label>
+                        <select id="durationFilter" class="filter-select">
+                            <option value="">Any Duration</option>
+                            <option value="short">Short (< 5 hours)</option>
+                            <option value="medium">Medium (5-20 hours)</option>
+                            <option value="long">Long (> 20 hours)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+                </div>
+            </div>
+
+            <div class="catalog-section">
+                <div class="section-header">
+                    <h2 class="section-title">Available Courses</h2>
+                    <div class="results-info">
+                        <span id="resultsCount">0 courses found</span>
+                        <div class="view-toggle">
+                            <button class="view-btn active" id="gridViewBtn" data-view="grid">
+                                <span class="view-icon">⊞</span>
+                            </button>
+                            <button class="view-btn" id="listViewBtn" data-view="list">
+                                <span class="view-icon">☰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="courses-grid" id="coursesGrid">
+                    <!-- Course cards will be dynamically inserted here -->
+                </div>
+                
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">📚</div>
+                    <h3 class="empty-title">No courses found</h3>
+                    <p class="empty-description">Try adjusting your search criteria or browse all categories.</p>
+                    <button class="btn btn-primary" id="browseAllBtn">Browse All Courses</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Course Detail Modal -->
+    <div class="modal" id="courseDetailModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Course Details</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Course details will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                <button class="btn btn-primary" id="enrollBtn">Enroll Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading courses...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/catalog.js"></script>
+</body>
+</html>

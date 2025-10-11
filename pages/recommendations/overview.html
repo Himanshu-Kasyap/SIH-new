@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recommendations - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/recommendations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be populated by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>AI Career Recommendations</h1>
+                <p class="page-description">Discover personalized career development opportunities and skill gap analysis</p>
+            </div>
+
+            <!-- Target Role Selection -->
+            <section class="target-role-section">
+                <div class="section-header">
+                    <h2>Target Role Analysis</h2>
+                    <p>Select a target role to see personalized recommendations</p>
+                </div>
+                
+                <div class="role-selector">
+                    <select id="target-role-select" class="form-select">
+                        <option value="">Select a target role...</option>
+                    </select>
+                    <button id="analyze-btn" class="btn btn-primary" disabled>Analyze Fit</button>
+                </div>
+            </section>
+
+            <!-- Skill Gap Analysis -->
+            <section id="skill-gap-section" class="skill-gap-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Skill Gap Analysis</h2>
+                    <p>Areas for development to reach your target role</p>
+                </div>
+                
+                <div class="skill-gaps-container">
+                    <div class="skill-gaps-grid" id="skill-gaps-grid">
+                        <!-- Skill gaps will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Path Recommendations -->
+            <section id="learning-path-section" class="learning-path-section" style="display: none;">
+                <div class="section-header">
+                    <h2>Recommended Learning Path</h2>
+                    <p>Personalized development roadmap based on AI analysis</p>
+                </div>
+                
+                <div class="learning-path-container">
+                    <div class="path-timeline" id="path-timeline">
+                        <!-- Learning path will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="path-actions">
+                        <button id="create-idp-btn" class="btn btn-primary">Create Individual Development Plan</button>
+                        <button id="save-recommendations-btn" class="btn btn-secondary">Save Recommendations</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Current Recommendations -->
+            <section class="current-recommendations-section">
+                <div class="section-header">
+                    <h2>Your Current Recommendations</h2>
+                    <p>Previously generated career development suggestions</p>
+                </div>
+                
+                <div class="recommendations-grid" id="recommendations-grid">
+                    <!-- Current recommendations will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing career fit...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/recommendations-overview.js"></script>
+</body>
+</html>

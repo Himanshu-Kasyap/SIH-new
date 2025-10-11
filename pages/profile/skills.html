@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Assessment - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/profile.css">
+    <link rel="stylesheet" href="../../assets/css/pages/skills.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be loaded by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="header-left">
+                    <h1>Skill Assessment</h1>
+                    <p class="subtitle">Assess and manage your professional skills</p>
+                </div>
+                <div class="header-actions">
+                    <button id="import-skills-btn" class="btn btn-secondary">
+                        <span class="icon">📥</span>
+                        Import Skills
+                    </button>
+                    <button id="add-skill-btn" class="btn btn-primary">
+                        <span class="icon">+</span>
+                        Add Skill
+                    </button>
+                </div>
+            </div>
+
+            <div class="skills-container">
+                <!-- Skills Overview -->
+                <div class="skills-overview-section card">
+                    <h3 class="section-title">Skills Overview</h3>
+                    <div class="skills-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-skills">0</div>
+                            <div class="stat-label">Total Skills</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="verified-skills">0</div>
+                            <div class="stat-label">Verified Skills</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="avg-level">0.0</div>
+                            <div class="stat-label">Average Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="skill-gaps">0</div>
+                            <div class="stat-label">Skill Gaps</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Categories -->
+                <div class="skills-categories">
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-category="all">All Skills</button>
+                        <button class="filter-btn" data-category="technical">Technical</button>
+                        <button class="filter-btn" data-category="soft">Soft Skills</button>
+                        <button class="filter-btn" data-category="leadership">Leadership</button>
+                        <button class="filter-btn" data-category="domain">Domain</button>
+                    </div>
+
+                    <!-- Skills Grid -->
+                    <div class="skills-grid" id="skills-grid">
+                        <div class="loading">Loading skills...</div>
+                    </div>
+                </div>
+
+                <!-- Skill Gap Analysis -->
+                <div class="skill-gaps-section card">
+                    <h3 class="section-title">
+                        Skill Gap Analysis
+                        <button id="analyze-gaps-btn" class="btn btn-small btn-secondary">
+                            <span class="icon">🔍</span>
+                            Analyze Gaps
+                        </button>
+                    </h3>
+                    <div id="skill-gaps-content" class="skill-gaps-content">
+                        <div class="no-data">Click "Analyze Gaps" to identify skill gaps for target roles</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Skill Modal -->
+    <div id="add-skill-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Skill</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-skill-form">
+                    <div class="form-group">
+                        <label for="skill-name" class="required">Skill Name</label>
+                        <input type="text" id="skill-name" name="skillName" required 
+                               placeholder="e.g., JavaScript, Leadership, Data Analysis" maxlength="50">
+                        <div class="field-error" id="skill-name-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skill-category">Category</label>
+                        <select id="skill-category" name="category">
+                            <option value="technical">Technical</option>
+                            <option value="soft">Soft Skills</option>
+                            <option value="leadership">Leadership</option>
+                            <option value="domain">Domain Knowledge</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skill-level" class="required">Current Level</label>
+                        <div class="skill-rating">
+                            <div class="rating-stars" id="add-skill-stars">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <div class="rating-labels">
+                                <span>1 - Beginner</span>
+                                <span>2 - Basic</span>
+                                <span>3 - Intermediate</span>
+                                <span>4 - Advanced</span>
+                                <span>5 - Expert</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="skill-level" name="level" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="skill-verified" name="verified">
+                            Mark as verified (if you have certification or formal validation)
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('add-skill-modal')">Cancel</button>
+                <button type="submit" form="add-skill-form" class="btn btn-primary">Add Skill</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Skill Modal -->
+    <div id="edit-skill-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Skill</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-skill-form">
+                    <div class="form-group">
+                        <label for="edit-skill-name" class="required">Skill Name</label>
+                        <input type="text" id="edit-skill-name" name="skillName" required maxlength="50">
+                        <div class="field-error" id="edit-skill-name-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-skill-level" class="required">Current Level</label>
+                        <div class="skill-rating">
+                            <div class="rating-stars" id="edit-skill-stars">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <div class="rating-labels">
+                                <span>1 - Beginner</span>
+                                <span>2 - Basic</span>
+                                <span>3 - Intermediate</span>
+                                <span>4 - Advanced</span>
+                                <span>5 - Expert</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="edit-skill-level" name="level" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="edit-skill-verified" name="verified">
+                            Mark as verified
+                        </label>
+                    </div>
+
+                    <input type="hidden" id="edit-skill-original-name" name="originalName">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete-skill-btn">Delete</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('edit-skill-modal')">Cancel</button>
+                <button type="submit" form="edit-skill-form" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Skills Modal -->
+    <div id="import-skills-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Import Skills</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Import skills from common skill sets or your existing records:</p>
+                
+                <div class="import-options">
+                    <div class="import-option">
+                        <h4>Software Development</h4>
+                        <p>JavaScript, Python, React, Node.js, SQL, Git</p>
+                        <button class="btn btn-small btn-secondary" data-skillset="development">Import</button>
+                    </div>
+                    
+                    <div class="import-option">
+                        <h4>Project Management</h4>
+                        <p>Agile, Scrum, Leadership, Communication, Planning</p>
+                        <button class="btn btn-small btn-secondary" data-skillset="pm">Import</button>
+                    </div>
+                    
+                    <div class="import-option">
+                        <h4>Data Analysis</h4>
+                        <p>Excel, SQL, Python, Statistics, Data Visualization</p>
+                        <button class="btn btn-small btn-secondary" data-skillset="data">Import</button>
+                    </div>
+                    
+                    <div class="import-option">
+                        <h4>Marketing</h4>
+                        <p>Digital Marketing, SEO, Content Strategy, Analytics</p>
+                        <button class="btn btn-small btn-secondary" data-skillset="marketing">Import</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('import-skills-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Success</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="success-message">Operation completed successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal('success-modal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('error-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/skill-assessment.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register new employee - HR Talent Management System">
+    <title>Employee Registration - HR Talent Management System</title>
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="../../index.html" aria-label="HR Talent Management System Home">
+                    HR Talent Management
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a href="login.html">Back to Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" role="main">
+        <div class="flex justify-center" style="min-height: 80vh; align-items: center;">
+            <div class="card" style="width: 100%; max-width: 500px;">
+                <!-- Registration Form Header -->
+                <div class="card-header" style="text-align: center; margin-bottom: var(--space-lg);">
+                    <div class="metric-icon success" style="margin: 0 auto var(--space-sm);">
+                        👤
+                    </div>
+                    <h1 class="card-title">Employee Registration</h1>
+                    <p class="card-subtitle">Invite and onboard new employees to the system</p>
+                </div>
+
+                <!-- Success Message -->
+                <div id="success-message" class="notification success" style="display: none; position: relative; top: auto; right: auto; margin-bottom: var(--space-md); animation: none;">
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="notification error" style="display: none; position: relative; top: auto; right: auto; margin-bottom: var(--space-md); animation: none;">
+                </div>
+
+                <!-- Registration Form -->
+                <form id="register-form" data-form="register" novalidate>
+                    <div class="grid grid-cols-2" style="gap: var(--space-md);">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                class="form-input" 
+                                required 
+                                autocomplete="given-name"
+                                placeholder="Enter first name"
+                                aria-describedby="firstName-error"
+                            >
+                            <div id="firstName-error" class="form-error" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                class="form-input" 
+                                required 
+                                autocomplete="family-name"
+                                placeholder="Enter last name"
+                                aria-describedby="lastName-error"
+                            >
+                            <div id="lastName-error" class="form-error" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            required 
+                            autocomplete="email"
+                            placeholder="Enter email address"
+                            aria-describedby="email-error"
+                        >
+                        <div id="email-error" class="form-error" style="display: none;"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2" style="gap: var(--space-md);">
+                        <div class="form-group">
+                            <label for="department" class="form-label">Department *</label>
+                            <select 
+                                id="department" 
+                                name="department" 
+                                class="form-input" 
+                                required 
+                                aria-describedby="department-error"
+                            >
+                                <option value="">Select Department</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Customer Support">Customer Support</option>
+                            </select>
+                            <div id="department-error" class="form-error" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="position" class="form-label">Position *</label>
+                            <input 
+                                type="text" 
+                                id="position" 
+                                name="position" 
+                                class="form-input" 
+                                required 
+                                placeholder="Enter job position"
+                                aria-describedby="position-error"
+                            >
+                            <div id="position-error" class="form-error" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tempPassword" class="form-label">Temporary Password *</label>
+                        <input 
+                            type="password" 
+                            id="tempPassword" 
+                            name="tempPassword" 
+                            class="form-input" 
+                            required 
+                            placeholder="Enter temporary password"
+                            aria-describedby="tempPassword-error"
+                        >
+                        <div id="tempPassword-error" class="form-error" style="display: none;"></div>
+                        <p style="font-size: var(--font-size-xs); color: var(--text-secondary); margin-top: var(--space-xs);">
+                            Employee will be required to change this password on first login
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            class="form-input" 
+                            required 
+                            placeholder="Confirm temporary password"
+                            aria-describedby="confirmPassword-error"
+                        >
+                        <div id="confirmPassword-error" class="form-error" style="display: none;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;" id="register-button">
+                            <span id="register-button-text">Register Employee</span>
+                            <div id="register-loading" class="loading" style="display: none;"></div>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Additional Actions -->
+                <div class="card-footer" style="text-align: center;">
+                    <p style="margin-bottom: var(--space-sm); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                        Already have an account?
+                    </p>
+                    <a href="login.html" class="btn btn-secondary" style="width: 100%;">
+                        Back to Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-white); border-top: 1px solid var(--border-light); padding: var(--space-lg) 0; margin-top: var(--space-xl);">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    © 2024 HR Talent Management System. All rights reserved.
+                </p>
+                <p style="color: var(--text-secondary); font-size: var(--font-size-sm);">
+                    Version 1.0.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    
+    <!-- Page-specific initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Registration page loaded');
+        });
+    </script>
+</body>
+</html>

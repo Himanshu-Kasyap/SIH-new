@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HR Dashboard - Comprehensive talent management overview and analytics">
+    <meta name="theme-color" content="#2563eb">
+    <title>HR Dashboard - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/dashboard.css">
+</head>
+<body>
+    <!-- Skip links for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#navigation" class="skip-link">Skip to navigation</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Navigation -->
+    <div id="navigation"></div>
+
+    <!-- Main Content -->
+    <main class="dashboard-main" id="main-content">
+        <!-- Header Section -->
+        <header class="dashboard-header" role="banner">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1 class="dashboard-title" id="page-title">HR Dashboard</h1>
+                        <p class="dashboard-subtitle">Talent management overview and insights</p>
+                    </div>
+                    <div class="header-actions" role="toolbar" aria-label="Dashboard actions">
+                        <button class="btn btn-secondary hidden-mobile" id="refreshBtn" aria-describedby="refresh-help">
+                            <span aria-hidden="true">🔄</span> <span class="hidden-mobile">Refresh Data</span>
+                        </button>
+                        <div id="refresh-help" class="sr-only">Refresh dashboard data</div>
+                        
+                        <button class="btn btn-secondary hidden-mobile" id="testNotificationBtn" aria-describedby="notification-help">
+                            <span aria-hidden="true">🔔</span> <span class="hidden-mobile">Test Notification</span>
+                        </button>
+                        <div id="notification-help" class="sr-only">Test notification system</div>
+                        
+                        <button class="btn btn-primary" id="addEmployeeBtn" aria-describedby="add-employee-help">
+                            <span aria-hidden="true">➕</span> <span class="hidden-mobile">Add Employee</span>
+                        </button>
+                        <div id="add-employee-help" class="sr-only">Add new employee to system</div>
+                        
+                        <!-- Mobile action menu -->
+                        <div class="block-mobile hidden">
+                            <button class="btn btn-secondary" id="mobileActionsBtn" aria-label="More actions" aria-haspopup="true" aria-expanded="false">
+                                <span aria-hidden="true">⋯</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="container">
+                <!-- Metrics Cards Section -->
+                <section class="metrics-section" aria-labelledby="metrics-title">
+                    <h2 class="section-title" id="metrics-title">Employee Overview</h2>
+                    <div class="metrics-grid" id="metricsGrid" role="region" aria-label="Employee metrics" aria-live="polite">
+                        <!-- Metrics cards will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Main Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Left Column: 9-Box Matrix -->
+                    <section class="matrix-section" aria-labelledby="matrix-title">
+                        <div class="card">
+                            <header class="card-header">
+                                <h3 class="card-title" id="matrix-title">9-Box Performance Matrix</h3>
+                                <div class="card-actions">
+                                    <button class="btn btn-sm btn-secondary" id="matrixFullscreenBtn" aria-describedby="fullscreen-help">
+                                        <span aria-hidden="true">⛶</span> Fullscreen
+                                    </button>
+                                    <div id="fullscreen-help" class="sr-only">View matrix in fullscreen mode</div>
+                                </div>
+                            </header>
+                            <div class="card-content">
+                                <div class="matrix-container" id="nineBoxMatrix" role="application" aria-label="Interactive 9-box performance matrix" aria-describedby="matrix-description">
+                                    <!-- 9-box matrix will be rendered here -->
+                                </div>
+                                <div id="matrix-description" class="sr-only">
+                                    Interactive matrix showing employee performance versus potential. Use arrow keys to navigate between employees.
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right Column: Sidebar Content -->
+                    <aside class="dashboard-sidebar">
+                        <!-- Succession Planning -->
+                        <section class="succession-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Succession Readiness</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="succession-stats" id="successionStats">
+                                        <!-- Succession statistics will be populated -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Recent Activities -->
+                        <section class="activities-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Recent Activities</h3>
+                                    <a href="/pages/reports/analytics.html" class="card-link">View All</a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="activities-list" id="activitiesList">
+                                        <!-- Recent activities will be populated -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Quick Actions -->
+                        <section class="quick-actions-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Quick Actions</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="quick-actions" id="quickActions">
+                                        <button class="action-btn" data-action="generate-reports">
+                                            <span class="action-icon">📊</span>
+                                            <span class="action-text">Generate Reports</span>
+                                        </button>
+                                        <button class="action-btn" data-action="review-idps">
+                                            <span class="action-icon">📋</span>
+                                            <span class="action-text">Review IDPs</span>
+                                        </button>
+                                        <button class="action-btn" data-action="manage-roles">
+                                            <span class="action-icon">💼</span>
+                                            <span class="action-text">Manage Roles</span>
+                                        </button>
+                                        <button class="action-btn" data-action="view-analytics">
+                                            <span class="action-icon">📈</span>
+                                            <span class="action-text">View Analytics</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/accessibility.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/components/notification.js"></script>
+    <script src="../../assets/js/components/card.js"></script>
+    <script src="../../assets/js/components/nine-box.js"></script>
+    <script src="../../assets/js/pages/dashboard.js"></script>
+</body>
+</html>

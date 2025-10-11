@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Role - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/role-edit.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title" id="pageTitle">Create New Role</h1>
+                    <p class="page-description">Define role requirements, competencies, and skill levels</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-primary" id="saveRoleBtn">
+                        <span class="btn-icon">💾</span>
+                        Save Role
+                    </button>
+                </div>
+            </header>
+
+            <form class="role-form" id="roleForm">
+                <!-- Basic Information Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Basic Information</h2>
+                        <p class="section-description">Define the core details of this role</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="roleTitle" class="form-label required">Role Title</label>
+                            <input type="text" id="roleTitle" name="title" class="form-input" 
+                                   placeholder="e.g., Senior Software Engineer" required>
+                            <div class="form-error" id="titleError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roleDepartment" class="form-label required">Department</label>
+                            <select id="roleDepartment" name="department" class="form-select" required>
+                                <option value="">Select Department</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Product">Product</option>
+                                <option value="Design">Design</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Customer Success">Customer Success</option>
+                            </select>
+                            <div class="form-error" id="departmentError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roleLevel" class="form-label required">Level</label>
+                            <select id="roleLevel" name="level" class="form-select" required>
+                                <option value="">Select Level</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Mid">Mid</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Director">Director</option>
+                                <option value="Executive">Executive</option>
+                            </select>
+                            <div class="form-error" id="levelError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roleExperience" class="form-label required">Years of Experience</label>
+                            <input type="number" id="roleExperience" name="experience" class="form-input" 
+                                   min="0" max="50" placeholder="e.g., 5" required>
+                            <div class="form-error" id="experienceError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Requirements Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Education Requirements</h2>
+                        <p class="section-description">Specify educational qualifications needed for this role</p>
+                    </div>
+                    
+                    <div class="education-container">
+                        <div class="education-input-group">
+                            <input type="text" id="educationInput" class="form-input" 
+                                   placeholder="e.g., Bachelor's in Computer Science">
+                            <button type="button" class="btn btn-secondary" id="addEducationBtn">Add</button>
+                        </div>
+                        
+                        <div class="education-list" id="educationList">
+                            <!-- Education items will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Competencies Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Core Competencies</h2>
+                        <p class="section-description">Define the key competencies and behaviors expected</p>
+                    </div>
+                    
+                    <div class="competencies-container">
+                        <div class="competency-input-group">
+                            <input type="text" id="competencyInput" class="form-input" 
+                                   placeholder="e.g., Technical Leadership">
+                            <button type="button" class="btn btn-secondary" id="addCompetencyBtn">Add</button>
+                        </div>
+                        
+                        <div class="competencies-list" id="competenciesList">
+                            <!-- Competency items will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Required Skills Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Required Skills</h2>
+                        <p class="section-description">Define specific skills and their minimum proficiency levels</p>
+                    </div>
+                    
+                    <div class="skills-container">
+                        <div class="skill-input-group">
+                            <div class="skill-input-row">
+                                <input type="text" id="skillNameInput" class="form-input" 
+                                       placeholder="Skill name (e.g., JavaScript)">
+                                <select id="skillLevelInput" class="form-select">
+                                    <option value="1">Level 1 - Beginner</option>
+                                    <option value="2">Level 2 - Basic</option>
+                                    <option value="3" selected>Level 3 - Intermediate</option>
+                                    <option value="4">Level 4 - Advanced</option>
+                                    <option value="5">Level 5 - Expert</option>
+                                </select>
+                                <input type="number" id="skillWeightInput" class="form-input" 
+                                       placeholder="Weight" min="0" max="2" step="0.1" value="1">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="skillCriticalInput">
+                                    <span class="checkbox-text">Critical</span>
+                                </label>
+                                <button type="button" class="btn btn-secondary" id="addSkillBtn">Add</button>
+                            </div>
+                        </div>
+                        
+                        <div class="skills-list" id="skillsList">
+                            <!-- Skill items will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Confirm Action</h2>
+                <button class="modal-close" id="confirmModalClose">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to perform this action?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="confirmCancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="confirmActionBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon" id="toastIcon"></span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Saving role...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/role-edit.js"></script>
+</body>
+</html>

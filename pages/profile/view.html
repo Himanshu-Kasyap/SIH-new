@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/profile.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be loaded by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="header-left">
+                    <h1>Employee Profile</h1>
+                    <p class="subtitle">View and manage employee information</p>
+                </div>
+                <div class="header-actions">
+                    <button id="edit-profile-btn" class="btn btn-primary">
+                        <span class="icon">✏️</span>
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <!-- Profile Header -->
+                <div class="profile-header card">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder" id="profile-avatar">
+                            <span id="avatar-initials">--</span>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profile-name">Loading...</h2>
+                        <p id="profile-position" class="position">Loading...</p>
+                        <p id="profile-department" class="department">Loading...</p>
+                        <div class="profile-meta">
+                            <span class="meta-item">
+                                <span class="icon">📧</span>
+                                <span id="profile-email">Loading...</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="icon">💼</span>
+                                <span id="profile-experience">0</span> years experience
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Details Grid -->
+                <div class="profile-details">
+                    <!-- Basic Information -->
+                    <div class="profile-section card">
+                        <h3 class="section-title">Basic Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Full Name</label>
+                                <span id="detail-name">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Email</label>
+                                <span id="detail-email">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Position</label>
+                                <span id="detail-position">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Department</label>
+                                <span id="detail-department">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Experience</label>
+                                <span id="detail-experience">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Role</label>
+                                <span id="detail-role">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="profile-section card">
+                        <h3 class="section-title">Education</h3>
+                        <div id="education-list" class="education-list">
+                            <div class="loading">Loading education information...</div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Metrics -->
+                    <div class="profile-section card">
+                        <h3 class="section-title">Performance Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <label>Performance Rating</label>
+                                <div class="rating-display">
+                                    <div id="performance-stars" class="stars-display"></div>
+                                    <span id="performance-value" class="rating-value">0/5</span>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <label>Potential Rating</label>
+                                <div class="rating-display">
+                                    <div id="potential-stars" class="stars-display"></div>
+                                    <span id="potential-value" class="rating-value">0/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Overview -->
+                    <div class="profile-section card">
+                        <h3 class="section-title">
+                            Skills Overview
+                            <a href="skills.html" class="section-link">View All Skills</a>
+                        </h3>
+                        <div id="skills-overview" class="skills-overview">
+                            <div class="loading">Loading skills information...</div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements & Feedback -->
+                    <div class="profile-section card">
+                        <h3 class="section-title">
+                            Achievements & Feedback
+                            <a href="edit.html#achievements" class="section-link">Manage</a>
+                        </h3>
+                        <div class="achievements-container">
+                            <div class="achievements-summary">
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-value" id="total-achievements">0</span>
+                                        <span class="stat-label">Total Achievements</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value" id="certifications-count">0</span>
+                                        <span class="stat-label">Certifications</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-value" id="feedback-count">0</span>
+                                        <span class="stat-label">Feedback Items</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="achievements-list" class="achievements-list">
+                                <div class="loading">Loading achievements...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading profile...</p>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred while loading the profile.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('error-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/profile.js"></script>
+</body>
+</html>

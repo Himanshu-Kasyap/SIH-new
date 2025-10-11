@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Comparison - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/recommendations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav id="main-navigation" class="main-nav">
+            <!-- Navigation will be populated by JavaScript -->
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Role Comparison Analysis</h1>
+                <p class="page-description">Compare your current profile with target role requirements</p>
+            </div>
+
+            <!-- Comparison Overview -->
+            <section class="comparison-overview-section">
+                <div class="section-header">
+                    <h2>Comparison Overview</h2>
+                    <div class="comparison-actions">
+                        <button id="change-target-role-btn" class="btn btn-secondary">Change Target Role</button>
+                        <button id="export-comparison-btn" class="btn btn-outline">Export Analysis</button>
+                    </div>
+                </div>
+                
+                <div class="comparison-summary-cards">
+                    <div class="summary-card match-score">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-content">
+                            <h3 id="overall-match-score">--</h3>
+                            <p>Overall Match</p>
+                        </div>
+                        <div class="card-trend" id="match-trend">
+                            <!-- Trend indicator -->
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card skills-match">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-content">
+                            <h3 id="skills-match-score">--</h3>
+                            <p>Skills Match</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card experience-match">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <h3 id="experience-match-score">--</h3>
+                            <p>Experience Match</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card readiness-score">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-content">
+                            <h3 id="readiness-score">--</h3>
+                            <p>Readiness Score</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Role Information -->
+            <section class="role-info-section">
+                <div class="role-comparison-cards">
+                    <div class="role-card current-role">
+                        <div class="role-card-header">
+                            <h3>Current Profile</h3>
+                            <span class="role-badge current">Current</span>
+                        </div>
+                        <div class="role-details" id="current-role-details">
+                            <!-- Current role details will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-arrow">
+                        <div class="arrow-icon">→</div>
+                        <span class="arrow-label">Transition to</span>
+                    </div>
+                    
+                    <div class="role-card target-role">
+                        <div class="role-card-header">
+                            <h3 id="target-role-title">Target Role</h3>
+                            <span class="role-badge target">Target</span>
+                        </div>
+                        <div class="role-details" id="target-role-details">
+                            <!-- Target role details will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Comparison -->
+            <section class="skills-comparison-section">
+                <div class="section-header">
+                    <h2>Skills Analysis</h2>
+                    <p>Detailed comparison of your skills vs target role requirements</p>
+                </div>
+                
+                <div class="skills-filter-controls">
+                    <div class="filter-group">
+                        <label>Filter by Gap:</label>
+                        <select id="gap-filter" class="form-select">
+                            <option value="">All Skills</option>
+                            <option value="no-gap">No Gap (Ready)</option>
+                            <option value="small-gap">Small Gap (1 level)</option>
+                            <option value="medium-gap">Medium Gap (2 levels)</option>
+                            <option value="large-gap">Large Gap (3+ levels)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Filter by Priority:</label>
+                        <select id="priority-filter" class="form-select">
+                            <option value="">All Priorities</option>
+                            <option value="critical">Critical Skills</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                    </div>
+                    
+                    <div class="view-toggle">
+                        <button id="chart-view-btn" class="btn btn-sm btn-primary">Chart View</button>
+                        <button id="table-view-btn" class="btn btn-sm btn-outline">Table View</button>
+                    </div>
+                </div>
+                
+                <!-- Chart View -->
+                <div id="skills-chart-view" class="skills-chart-container">
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color current-level"></div>
+                            <span>Your Current Level</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color required-level"></div>
+                            <span>Required Level</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color gap-indicator"></div>
+                            <span>Skill Gap</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-chart" id="skills-chart">
+                        <!-- Skills chart will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Table View -->
+                <div id="skills-table-view" class="skills-table-container" style="display: none;">
+                    <div class="skills-table-wrapper">
+                        <table class="skills-table">
+                            <thead>
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Current Level</th>
+                                    <th>Required Level</th>
+                                    <th>Gap</th>
+                                    <th>Priority</th>
+                                    <th>Weight</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="skills-table-body">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience & Education Comparison -->
+            <section class="experience-comparison-section">
+                <div class="section-header">
+                    <h2>Experience & Education Analysis</h2>
+                    <p>Compare your background with role requirements</p>
+                </div>
+                
+                <div class="experience-comparison-grid">
+                    <div class="experience-card">
+                        <h4>Work Experience</h4>
+                        <div class="experience-comparison">
+                            <div class="experience-bar-container">
+                                <div class="experience-label">Your Experience</div>
+                                <div class="experience-bar">
+                                    <div id="current-experience-bar" class="experience-fill current"></div>
+                                </div>
+                                <span id="current-experience-text" class="experience-text">-- years</span>
+                            </div>
+                            
+                            <div class="experience-bar-container">
+                                <div class="experience-label">Required Experience</div>
+                                <div class="experience-bar">
+                                    <div id="required-experience-bar" class="experience-fill required"></div>
+                                </div>
+                                <span id="required-experience-text" class="experience-text">-- years</span>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-gap-indicator" id="experience-gap">
+                            <!-- Gap indicator will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="education-card">
+                        <h4>Education Requirements</h4>
+                        <div class="education-comparison">
+                            <div class="education-section">
+                                <h5>Your Education</h5>
+                                <ul id="current-education-list" class="education-list">
+                                    <!-- Current education will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                            
+                            <div class="education-section">
+                                <h5>Required Education</h5>
+                                <ul id="required-education-list" class="education-list">
+                                    <!-- Required education will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="education-match-indicator" id="education-match">
+                            <!-- Match indicator will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Development Recommendations -->
+            <section class="development-recommendations-section">
+                <div class="section-header">
+                    <h2>Development Recommendations</h2>
+                    <p>Prioritized actions to bridge the gap to your target role</p>
+                </div>
+                
+                <div class="recommendations-priority-tabs">
+                    <button class="priority-tab active" data-priority="high">High Priority</button>
+                    <button class="priority-tab" data-priority="medium">Medium Priority</button>
+                    <button class="priority-tab" data-priority="low">Low Priority</button>
+                </div>
+                
+                <div class="recommendations-content" id="recommendations-content">
+                    <!-- Recommendations will be populated by JavaScript -->
+                </div>
+                
+                <div class="recommendations-actions">
+                    <button id="create-development-plan-btn" class="btn btn-primary">Create Development Plan</button>
+                    <button id="save-comparison-btn" class="btn btn-secondary">Save Analysis</button>
+                </div>
+            </section>
+
+            <!-- Alternative Roles -->
+            <section class="alternative-roles-section">
+                <div class="section-header">
+                    <h2>Alternative Role Suggestions</h2>
+                    <p>Other roles that might be a good fit based on your current profile</p>
+                </div>
+                
+                <div class="alternative-roles-grid" id="alternative-roles-grid">
+                    <!-- Alternative roles will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Role Selection Modal -->
+    <div id="role-selection-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Target Role</h3>
+                <button class="modal-close" onclick="comparePage.closeRoleSelectionModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="role-search">
+                    <input type="text" id="role-search-input" placeholder="Search roles..." class="form-input">
+                </div>
+                <div class="roles-list" id="roles-list">
+                    <!-- Roles will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="comparePage.closeRoleSelectionModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing role comparison...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/compare.js"></script>
+</body>
+</html>

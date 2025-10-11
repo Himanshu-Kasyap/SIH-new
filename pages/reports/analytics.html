@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - HR Talent Management</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/analytics.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title">Analytics Dashboard</h1>
+                    <p class="page-description">Comprehensive reporting and analytics for talent management insights</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <span class="btn-icon">📊</span>
+                        Export Report
+                    </button>
+                    <button class="btn btn-primary" id="refreshBtn">
+                        <span class="btn-icon">🔄</span>
+                        Refresh Data
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filter Controls -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="departmentFilter" class="filter-label">Department</label>
+                        <select id="departmentFilter" class="filter-select">
+                            <option value="">All Departments</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="timeRangeFilter" class="filter-label">Time Range</label>
+                        <select id="timeRangeFilter" class="filter-select">
+                            <option value="30">Last 30 Days</option>
+                            <option value="90" selected>Last 3 Months</option>
+                            <option value="180">Last 6 Months</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="roleFilter" class="filter-label">Role Level</label>
+                        <select id="roleFilter" class="filter-select">
+                            <option value="">All Levels</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Mid">Mid</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Metrics Overview -->
+            <section class="metrics-overview">
+                <div class="metrics-grid">
+                    <div class="metric-card" id="totalEmployeesCard">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="totalEmployees">-</div>
+                            <div class="metric-label">Total Employees</div>
+                            <div class="metric-change" id="employeeChange">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" id="activeIDPsCard">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="activeIDPs">-</div>
+                            <div class="metric-label">Active IDPs</div>
+                            <div class="metric-change" id="idpChange">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" id="skillGapsCard">
+                        <div class="metric-icon">📊</div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="skillGaps">-</div>
+                            <div class="metric-label">Skill Gaps Identified</div>
+                            <div class="metric-change" id="skillGapChange">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" id="completionRateCard">
+                        <div class="metric-icon">✅</div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="completionRate">-</div>
+                            <div class="metric-label">Training Completion Rate</div>
+                            <div class="metric-change" id="completionChange">-</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts and Visualizations -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <!-- Employee Progress Chart -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Employee Progress Reports</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn" data-view="progress">Progress View</button>
+                                <button class="chart-btn active" data-view="department">By Department</button>
+                            </div>
+                        </div>
+                        <div class="chart-content" id="progressChart">
+                            <div class="chart-placeholder">Loading chart...</div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Gap Analytics -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Skill Gap Analytics</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-view="gaps">Gap Analysis</button>
+                                <button class="chart-btn" data-view="trends">Trends</button>
+                            </div>
+                        </div>
+                        <div class="chart-content" id="skillGapChart">
+                            <div class="chart-placeholder">Loading chart...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Reports -->
+            <section class="reports-section">
+                <div class="reports-grid">
+                    <!-- Employee Progress Table -->
+                    <div class="report-container">
+                        <div class="report-header">
+                            <h3 class="report-title">Employee Progress Details</h3>
+                            <div class="report-actions">
+                                <input type="text" id="progressSearch" class="search-input" placeholder="Search employees...">
+                                <button class="btn btn-sm btn-secondary" id="exportProgressBtn">Export</button>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <div class="table-container">
+                                <table class="data-table" id="progressTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Department</th>
+                                            <th>IDP Progress</th>
+                                            <th>Skills Completed</th>
+                                            <th>Performance</th>
+                                            <th>Potential</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="progressTableBody">
+                                        <tr>
+                                            <td colspan="7" class="loading-cell">Loading data...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Gap Summary -->
+                    <div class="report-container">
+                        <div class="report-header">
+                            <h3 class="report-title">Organizational Skill Gaps</h3>
+                            <div class="report-actions">
+                                <select id="skillCategoryFilter" class="filter-select">
+                                    <option value="">All Skills</option>
+                                    <option value="technical">Technical Skills</option>
+                                    <option value="leadership">Leadership Skills</option>
+                                    <option value="soft">Soft Skills</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="report-content">
+                            <div class="skill-gaps-list" id="skillGapsList">
+                                <div class="loading-message">Loading skill gaps...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Succession Planning Reports -->
+            <section class="succession-section">
+                <div class="section-header">
+                    <h2 class="section-title">Succession Planning Reports</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" id="exportSuccessionBtn">
+                            <span class="btn-icon">📊</span>
+                            Export Succession Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="succession-grid">
+                    <!-- Succession Readiness Overview -->
+                    <div class="succession-container">
+                        <div class="succession-header">
+                            <h3 class="succession-title">Succession Readiness Overview</h3>
+                            <div class="readiness-legend">
+                                <span class="legend-item ready">Ready Now</span>
+                                <span class="legend-item developing">1-2 Years</span>
+                                <span class="legend-item future">2+ Years</span>
+                                <span class="legend-item none">No Successor</span>
+                            </div>
+                        </div>
+                        <div class="succession-content">
+                            <div class="readiness-grid" id="successionReadiness">
+                                <div class="loading-message">Loading succession readiness...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendation Effectiveness -->
+                    <div class="succession-container">
+                        <div class="succession-header">
+                            <h3 class="succession-title">AI Recommendation Effectiveness</h3>
+                            <div class="effectiveness-controls">
+                                <select id="effectivenessTimeRange" class="filter-select">
+                                    <option value="30">Last 30 Days</option>
+                                    <option value="90" selected>Last 3 Months</option>
+                                    <option value="180">Last 6 Months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="succession-content">
+                            <div class="effectiveness-metrics" id="effectivenessMetrics">
+                                <div class="loading-message">Loading effectiveness data...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Succession Planning Insights -->
+                    <div class="succession-container full-width">
+                        <div class="succession-header">
+                            <h3 class="succession-title">Interactive Succession Planning Insights</h3>
+                            <div class="insights-controls">
+                                <button class="chart-btn active" data-view="matrix">9-Box Matrix</button>
+                                <button class="chart-btn" data-view="pipeline">Talent Pipeline</button>
+                                <button class="chart-btn" data-view="risk">Risk Analysis</button>
+                            </div>
+                        </div>
+                        <div class="succession-content">
+                            <div class="insights-chart" id="successionInsights">
+                                <div class="loading-message">Loading succession insights...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading analytics data...</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/analytics.js"></script>
+</body>
+</html>

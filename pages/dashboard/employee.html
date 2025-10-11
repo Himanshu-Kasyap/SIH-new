@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation"></div>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1 class="dashboard-title">My Dashboard</h1>
+                        <p class="dashboard-subtitle">Track your career development progress</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" id="refreshBtn">
+                            <span>🔄</span> Refresh
+                        </button>
+                        <button class="btn btn-secondary" id="testNotificationBtn">
+                            <span>🔔</span> Test Notification
+                        </button>
+                        <button class="btn btn-primary" id="viewIdpBtn">
+                            <span>📋</span> View IDP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="container">
+                <!-- Personal Metrics Section -->
+                <section class="metrics-section">
+                    <h2 class="section-title">Personal Metrics</h2>
+                    <div class="metrics-grid" id="personalMetricsGrid">
+                        <!-- Personal metrics cards will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Main Dashboard Grid -->
+                <div class="employee-dashboard-grid">
+                    <!-- Left Column: IDP Progress -->
+                    <section class="idp-section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon primary">📋</div>
+                                <div class="card-header-content">
+                                    <h3 class="card-title">Individual Development Plan</h3>
+                                    <p class="card-subtitle">Your personalized career development roadmap</p>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn btn-sm btn-secondary" id="editIdpBtn">
+                                        <span>✏️</span> Edit
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="idp-progress-container" id="idpProgressContainer">
+                                    <!-- IDP progress timeline will be rendered here -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right Column: Skill Gaps and Recommendations -->
+                    <aside class="employee-sidebar">
+                        <!-- Skill Gap Summary -->
+                        <section class="skill-gaps-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-icon warning">🎯</div>
+                                    <div class="card-header-content">
+                                        <h3 class="card-title">Skill Gap Summary</h3>
+                                        <p class="card-subtitle">Areas for improvement</p>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="skill-gaps-list" id="skillGapsList">
+                                        <!-- Skill gaps with progress bars will be rendered here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Training Recommendations -->
+                        <section class="recommendations-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-icon success">💡</div>
+                                    <div class="card-header-content">
+                                        <h3 class="card-title">Recommended Training</h3>
+                                        <p class="card-subtitle">Personalized learning suggestions</p>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="/pages/recommendations/overview.html" class="btn btn-sm btn-secondary">
+                                            View All
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="recommendations-list" id="recommendationsList">
+                                        <!-- Training recommendation cards will be rendered here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Quick Actions -->
+                        <section class="quick-actions-section">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-icon primary">⚡</div>
+                                    <div class="card-header-content">
+                                        <h3 class="card-title">Quick Actions</h3>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="quick-actions" id="quickActions">
+                                        <button class="action-btn" data-action="update-skills">
+                                            <span class="action-icon">⭐</span>
+                                            <span class="action-text">Update Skills</span>
+                                        </button>
+                                        <button class="action-btn" data-action="view-profile">
+                                            <span class="action-icon">👤</span>
+                                            <span class="action-text">View Profile</span>
+                                        </button>
+                                        <button class="action-btn" data-action="browse-training">
+                                            <span class="action-icon">📚</span>
+                                            <span class="action-text">Browse Training</span>
+                                        </button>
+                                        <button class="action-btn" data-action="view-progress">
+                                            <span class="action-icon">📈</span>
+                                            <span class="action-text">View Progress</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/components/notification.js"></script>
+    <script src="../../assets/js/components/card.js"></script>
+    <script src="../../assets/js/pages/employee-dashboard.js"></script>
+</body>
+</html>

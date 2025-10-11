@@ -1,0 +1,467 @@
+/**
+ * Training Catalog Page Styles
+ */
+
+/* Filters Section */
+.filters-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    margin-bottom: 24px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    max-width: 500px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 16px 12px 48px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 150px;
+}
+
+.filter-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.results-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 4px;
+    background: #f3f4f6;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.view-btn {
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.view-btn.active {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.view-icon {
+    font-size: 16px;
+}
+
+/* Courses Grid */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.courses-grid.list-view {
+    grid-template-columns: 1fr;
+}
+
+/* Course Card */
+.course-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.course-provider {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.provider-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.provider-internal { background: #10b981; }
+.provider-coursera { background: #0056d3; }
+.provider-linkedin { background: #0077b5; }
+.provider-udemy { background: #a435f0; }
+.provider-pluralsight { background: #f15b2a; }
+
+.course-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.course-description {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.course-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.course-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.skill-tag {
+    padding: 4px 8px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.course-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.rating-stars {
+    color: #fbbf24;
+}
+
+.rating-count {
+    color: #6b7280;
+}
+
+.course-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* List View Styles */
+.courses-grid.list-view .course-card {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.courses-grid.list-view .course-content {
+    flex: 1;
+}
+
+.courses-grid.list-view .course-meta {
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.empty-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.empty-description {
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+/* Modal Styles */
+.modal-large {
+    max-width: 800px;
+}
+
+.course-detail-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.course-detail-image {
+    width: 200px;
+    height: 120px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.course-detail-info {
+    flex: 1;
+}
+
+.course-detail-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.course-detail-provider {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.course-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.detail-meta-item {
+    text-align: center;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.meta-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    display: block;
+}
+
+.meta-label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.course-detail-description {
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.course-detail-skills {
+    margin-bottom: 24px;
+}
+
+.skills-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.course-outline {
+    margin-bottom: 24px;
+}
+
+.outline-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.outline-list {
+    list-style: none;
+    padding: 0;
+}
+
+.outline-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.outline-item:last-child {
+    border-bottom: none;
+}
+
+.outline-icon {
+    color: #10b981;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .course-header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .course-footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
+    .courses-grid.list-view .course-card {
+        flex-direction: column;
+    }
+    
+    .course-detail-header {
+        flex-direction: column;
+    }
+    
+    .course-detail-image {
+        width: 100%;
+        height: 160px;
+    }
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Library - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/role-library.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title">Role Library</h1>
+                    <p class="page-description">Browse and manage organizational roles and their competency requirements</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="createRoleBtn">
+                        <span class="btn-icon">➕</span>
+                        Create New Role
+                    </button>
+                </div>
+            </header>
+
+            <div class="filters-section">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search roles by title, department, or skills...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="departmentFilter" class="filter-label">Department</label>
+                        <select id="departmentFilter" class="filter-select">
+                            <option value="">All Departments</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="levelFilter" class="filter-label">Level</label>
+                        <select id="levelFilter" class="filter-select">
+                            <option value="">All Levels</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Mid">Mid</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Director">Director</option>
+                            <option value="Executive">Executive</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+                </div>
+            </div>
+
+            <div class="roles-section">
+                <div class="section-header">
+                    <h2 class="section-title">Organizational Roles</h2>
+                    <div class="results-info">
+                        <span id="resultsCount">0 roles found</span>
+                    </div>
+                </div>
+                
+                <div class="roles-grid" id="rolesGrid">
+                    <!-- Role cards will be dynamically inserted here -->
+                </div>
+                
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">📋</div>
+                    <h3 class="empty-title">No roles found</h3>
+                    <p class="empty-description">Try adjusting your search criteria or create a new role.</p>
+                    <button class="btn btn-primary" id="createFirstRoleBtn">Create First Role</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Role Detail Modal -->
+    <div class="modal" id="roleDetailModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Role Details</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Role details will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                <button class="btn btn-primary" id="editRoleBtn">Edit Role</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading roles...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/role-library.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Progress - TalentHub</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/pages/progress.css">
+</head>
+<body>
+    <div id="navigation"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title">Learning Progress</h1>
+                    <p class="page-description">Track your completed and in-progress training courses</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="browseCatalogBtn">
+                        <span class="btn-icon">📚</span>
+                        Browse Catalog
+                    </button>
+                </div>
+            </header>
+
+            <!-- Progress Overview -->
+            <div class="progress-overview">
+                <div class="overview-cards">
+                    <div class="overview-card">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <div class="card-value" id="totalCoursesCount">0</div>
+                            <div class="card-label">Total Courses</div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">✅</div>
+                        <div class="card-content">
+                            <div class="card-value" id="completedCoursesCount">0</div>
+                            <div class="card-label">Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">⏳</div>
+                        <div class="card-content">
+                            <div class="card-value" id="inProgressCoursesCount">0</div>
+                            <div class="card-label">In Progress</div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">⏱️</div>
+                        <div class="card-content">
+                            <div class="card-value" id="totalTimeSpent">0h</div>
+                            <div class="card-label">Time Spent</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="completion-chart">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Completion Rate</h3>
+                        <div class="completion-percentage" id="completionPercentage">0%</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">All Courses</button>
+                <button class="tab-btn" data-filter="in_progress">In Progress</button>
+                <button class="tab-btn" data-filter="completed">Completed</button>
+                <button class="tab-btn" data-filter="not_started">Not Started</button>
+            </div>
+
+            <!-- Course Progress List -->
+            <div class="progress-section">
+                <div class="section-header">
+                    <h2 class="section-title">Course Progress</h2>
+                    <div class="sort-controls">
+                        <label for="sortSelect" class="sort-label">Sort by:</label>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="recent">Most Recent</option>
+                            <option value="progress">Progress</option>
+                            <option value="title">Course Title</option>
+                            <option value="completion">Completion Date</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="progress-list" id="progressList">
+                    <!-- Progress items will be dynamically inserted here -->
+                </div>
+                
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">📚</div>
+                    <h3 class="empty-title">No courses found</h3>
+                    <p class="empty-description">Start learning by browsing our course catalog.</p>
+                    <button class="btn btn-primary" id="startLearningBtn">Browse Courses</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Course Progress Modal -->
+    <div class="modal" id="progressModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Course Progress</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Progress details will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                <button class="btn btn-primary" id="updateProgressBtn" style="display: none;">Update Progress</button>
+                <button class="btn btn-success" id="markCompleteBtn" style="display: none;">Mark Complete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Update Modal -->
+    <div class="modal" id="updateModal">
+        <div class="modal-overlay" id="updateModalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Update Progress</h2>
+                <button class="modal-close" id="updateModalClose">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="progressSlider" class="form-label">Progress Percentage</label>
+                    <div class="progress-input-container">
+                        <input type="range" id="progressSlider" class="progress-slider" min="0" max="100" value="0">
+                        <span class="progress-value" id="progressValue">0%</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="timeSpentInput" class="form-label">Time Spent (minutes)</label>
+                    <input type="number" id="timeSpentInput" class="form-input" min="0" placeholder="Enter time spent">
+                </div>
+                
+                <div class="form-group">
+                    <label for="notesInput" class="form-label">Notes (optional)</label>
+                    <textarea id="notesInput" class="form-textarea" rows="3" placeholder="Add any notes about your progress..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="updateModalCancel">Cancel</button>
+                <button class="btn btn-primary" id="saveProgressBtn">Save Progress</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading progress...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/data.js"></script>
+    <script src="../../assets/js/components/navigation.js"></script>
+    <script src="../../assets/js/pages/progress-tracking.js"></script>
+</body>
+</html>
